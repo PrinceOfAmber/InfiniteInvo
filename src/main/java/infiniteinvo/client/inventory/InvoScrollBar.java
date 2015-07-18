@@ -3,7 +3,6 @@ package infiniteinvo.client.inventory;
 import infiniteinvo.core.ModSettings;
 import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.inventory.BigInventoryPlayer;
-import infiniteinvo.inventory.SlotLockable;
 import infiniteinvo.network.InvoPacket;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -77,13 +76,14 @@ public class InvoScrollBar extends GuiButton
 			
 			if(s.inventory == Minecraft.getMinecraft().thePlayer.inventory && s.getSlotIndex() >= 9 && s.getSlotIndex() < (ModSettings.invoSize < 27? 27 : ModSettings.invoSize) + 9)
 			{
+				/*
 				if(s.getClass() != Slot.class && s.getClass() != SlotLockable.class)
 				{
 					InfiniteInvo.logger.log(Level.WARN, "Container " + container.getClass().getSimpleName() + " is not supported by InfiniteInvo! Reason: Custom Slots (" + s.getClass() + ") are being used!");
 					return false;
-				}
+				}*/
 				
-				Slot r = new SlotLockable(s.inventory, index + 9, s.xDisplayPosition, s.yDisplayPosition);
+				Slot r = new Slot(s.inventory, index + 9, s.xDisplayPosition, s.yDisplayPosition);
 				
 				// Replace the local slot with our own tweaked one so that locked slots are handled properly
 				container.inventorySlots.set(i, r);
@@ -393,9 +393,10 @@ public class InvoScrollBar extends GuiButton
 			{
 				Slot s = invoSlots[i];
 				
-				if(s != null && s instanceof SlotLockable)
+				if(s != null /*&& s instanceof SlotLockable*/)
 				{
-					((SlotLockable)s).slotIndex = slotIndex[0][i] + (scrollPos * 9);
+					//((SlotLockable)s).slotIndex = slotIndex[0][i] + (scrollPos * 9);
+					s.slotNumber = slotIndex[0][i] + (scrollPos * 9);
 					s.onSlotChanged();
 				}
 			}

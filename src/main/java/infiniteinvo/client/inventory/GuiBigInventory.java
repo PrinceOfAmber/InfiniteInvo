@@ -26,24 +26,14 @@ public class GuiBigInventory extends GuiInventory
 	public boolean showCharacter = true;
 	int xStart = 169;
 	int yStart = 137;
-	int size = 18;
+	public static final int square = 18;
 	public GuiBigInventory(EntityPlayer player)
 	{
 		super(player);
 		container = player.inventoryContainer instanceof BigContainerPlayer? (BigContainerPlayer)player.inventoryContainer : null;
-		this.xSize = xStart + (size * ModSettings.MORE_COLS) + 15;
-		this.ySize = yStart + (size * ModSettings.MORE_ROWS) + 29;
-		/*
-		if(container == null)
-		{
-			if(player.inventoryContainer != null)
-			{
-				InfiniteInvo.logger.log(Level.WARN, "GUI opened with container " + player.inventoryContainer.getClass().getSimpleName() + "!", new IllegalArgumentException());
-			} else
-			{
-				InfiniteInvo.logger.log(Level.WARN, "GUI opened with null container!", new NullPointerException());
-			}
-		}*/
+		this.xSize = xStart + (square * ModSettings.MORE_COLS) + 15;
+		this.ySize = yStart + (square * ModSettings.MORE_ROWS) + 29;
+
 	}
 	
 	@Override
@@ -57,44 +47,44 @@ public class GuiBigInventory extends GuiInventory
         
         for(int i = 0; i < ModSettings.MORE_COLS; i++)
         {
-            this.drawTexturedModalRect(gLeft + xStart + (i * size), gTop, xStart, 0, size, yStart);
+            this.drawTexturedModalRect(gLeft + xStart + (i * square), gTop, xStart, 0, square, yStart);
         }
         
         for(int i = 0; i < ModSettings.MORE_ROWS; i++)
         {
-            this.drawTexturedModalRect(gLeft, gTop + yStart + (i * size), 0, 119, xStart, size);
+            this.drawTexturedModalRect(gLeft, gTop + yStart + (i * square), 0, 119, xStart, square);
         }
         
         for(int i = 0; i < ModSettings.MORE_COLS; i++)
         {
         	for(int j = 0; j < ModSettings.MORE_ROWS; j++)
         	{
-                this.drawTexturedModalRect(gLeft + xStart + (i * size), gTop + yStart + (j * size), 7, 83, size, size);
+                this.drawTexturedModalRect(gLeft + xStart + (i * square), gTop + yStart + (j * square), 7, 83, square, square);
         	}
         }
         
         int barW = (ModSettings.MORE_COLS + 9) * (ModSettings.MORE_ROWS + 3) < ModSettings.invoSize? 0 : 8;
 
-        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * size), gTop, 187, 0, 2, 119); // Scroll top
-        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * size) + 2, gTop, 189 + barW, 0, 13 - barW, 119); // Scroll top
+        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * square), gTop, 187, 0, 2, 119); // Scroll top
+        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * square) + 2, gTop, 189 + barW, 0, 13 - barW, 119); // Scroll top
         
         for(int i = 0; i < ModSettings.MORE_ROWS; i++)
         {
-            this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * size), gTop + 119 + (i * size), 187, 101, 2, size); // Scroll middle
-            this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * size) + 2, gTop + 119 + (i * size), 189 + barW, 101, 13 - barW, size); // Scroll middle
+            this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * square), gTop + 119 + (i * square), 187, 101, 2, square); // Scroll middle
+            this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * square) + 2, gTop + 119 + (i * square), 189 + barW, 101, 13 - barW, square); // Scroll middle
         }
         
-        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * size), gTop + 119 + (ModSettings.MORE_ROWS * size), 187, 119, 2, size); // Scroll bottom
-        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * size) + 2, gTop + 119 + (ModSettings.MORE_ROWS * size), 189 + barW, 119, 13 - barW, size); // Scroll bottom
+        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * square), gTop + 119 + (ModSettings.MORE_ROWS * square), 187, 119, 2, square); // Scroll bottom
+        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * square) + 2, gTop + 119 + (ModSettings.MORE_ROWS * square), 189 + barW, 119, 13 - barW, square); // Scroll bottom
         
-        this.drawTexturedModalRect(gLeft, gTop + yStart + (ModSettings.MORE_ROWS * size), 0, yStart, xStart, 29);
+        this.drawTexturedModalRect(gLeft, gTop + yStart + (ModSettings.MORE_ROWS * square), 0, yStart, xStart, 29);
         
         for(int i = 0; i < ModSettings.MORE_COLS; i++)
         {
-            this.drawTexturedModalRect(gLeft + xStart + (i * size), gTop + yStart + (ModSettings.MORE_ROWS * size), xStart, yStart, size, 29);
+            this.drawTexturedModalRect(gLeft + xStart + (i * square), gTop + yStart + (ModSettings.MORE_ROWS * square), xStart, yStart, square, 29);
         }
         
-        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * size), gTop + yStart + (ModSettings.MORE_ROWS * size), 187 + barW, yStart, 16 - barW, 29);
+        this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * square), gTop + yStart + (ModSettings.MORE_ROWS * square), 187 + barW, yStart, 16 - barW, 29);
 
         if(showCharacter)
         	drawEntityOnScreen(gLeft + 51, gTop + 75, 30, (float)(gLeft + 51) - (float)mouseX, (float)(gTop + 75 - 50) - (float)mouseY, this.mc.thePlayer);
@@ -127,10 +117,10 @@ public class GuiBigInventory extends GuiInventory
 	        	{
 	        		if(i + (j + container.scrollPos) * (9 + ModSettings.MORE_COLS) >= ModSettings.invoSize)
 	        		{
-	        			this.drawTexturedModalRect(7 + i * size, 83 + j * size, 0, 166, size, size);
+	        			this.drawTexturedModalRect(7 + i * square, 83 + j * square, 0, 166, square, square);
 	        		} else if(i + (j + container.scrollPos) * (9 + ModSettings.MORE_COLS) >= container.invo.getUnlockedSlots() - 9)
 	        		{
-	        			this.drawTexturedModalRect(7 + i * size, 83 + j * size, size, 166, size, size);
+	        			this.drawTexturedModalRect(7 + i * square, 83 + j * square, square, 166, square, square);
 	        		}
 	        	}
 	        }
@@ -163,16 +153,16 @@ public class GuiBigInventory extends GuiInventory
                 int j = scaledresolution.getScaledHeight();
                 int mouseX = Mouse.getX() * i / this.mc.displayWidth;
                 int mouseY = height - Mouse.getY() * j / this.mc.displayHeight - 1;
-        		int sx = this.guiLeft + xStart + (ModSettings.MORE_COLS * size);
+        		int sx = this.guiLeft + xStart + (ModSettings.MORE_COLS * square);
         		int sy = this.guiTop + 83;
         		
-        		boolean flag = mouseX >= sx && mouseY >= sy && mouseX < sx + 8 && mouseY < sy + (size * (3 + ModSettings.MORE_ROWS));
+        		boolean flag = mouseX >= sx && mouseY >= sy && mouseX < sx + 8 && mouseY < sy + (square * (3 + ModSettings.MORE_ROWS));
         		
         		if((flag || dragging == 1) && dragging != -1)
         		{
         			dragging = 1;
         			int maxScroll = MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)) - (3 + ModSettings.MORE_ROWS);
-        			container.scrollPos = MathHelper.clamp_int(Math.round((float)(mouseY - sy) / (float)(size * (3 + ModSettings.MORE_ROWS)) * (float)maxScroll), 0, maxScroll);
+        			container.scrollPos = MathHelper.clamp_int(Math.round((float)(mouseY - sy) / (float)(square * (3 + ModSettings.MORE_ROWS)) * (float)maxScroll), 0, maxScroll);
         		} else
         		{
         			dragging = -1;

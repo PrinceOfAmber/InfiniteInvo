@@ -5,7 +5,7 @@ import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.core.XPHelper;
 import infiniteinvo.handlers.EventHandler;
 import infiniteinvo.inventory.BigInventoryPlayer;
-import infiniteinvo.inventory.SlotLockable;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -208,6 +208,7 @@ public class InvoPacket implements IMessage
 						
 						if(s.inventory instanceof BigInventoryPlayer) // Not 100% necessary anymore but here as a fail safe
 						{
+							/*
 							if(s.getClass() != Slot.class && s.getClass() != SlotLockable.class)
 							{
 								InfiniteInvo.logger.log(Level.WARN, "Container " + container.getClass().getSimpleName() + " is not supported by InfiniteInvo! Reason: Custom Slots (" + s.getClass().getSimpleName() + ") are being used!");
@@ -226,7 +227,7 @@ public class InvoPacket implements IMessage
 							} else
 							{
 								((SlotLockable)s).slotIndex = sInx + (scrollPos * 9);
-							}
+							}*/
 							
 							//s.putStack(new ItemStack(Blocks.stone, s.getSlotIndex())); // Debugging to visualise the location and slot indexes serverside
 							
