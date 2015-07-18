@@ -35,7 +35,6 @@ public class InfiniteInvo
 	public SimpleNetworkWrapper network ;
 	public static Logger logger;
 	public static Configuration config;
-    
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
@@ -45,13 +44,13 @@ public class InfiniteInvo
     	config = new Configuration(event.getSuggestedConfigurationFile(), true);
     	config.load();
     	 
-		ModSettings.MORE_ROWS = config.getInt("Extra Rows", Configuration.CATEGORY_GENERAL, 8, 0, 20, "How many extra rows are displayed in the inventory screen");
-		ModSettings.MORE_COLS = config.getInt("Extra Columns", Configuration.CATEGORY_GENERAL, 20, 0, 10, "How many extra columns are displayed in the inventory screen");
+		ModSettings.MORE_ROWS = config.getInt("Extra Rows", Configuration.CATEGORY_GENERAL, 12, 0, 20, "How many extra rows are displayed in the inventory screen");
+		ModSettings.MORE_COLS = config.getInt("Extra Columns", Configuration.CATEGORY_GENERAL, 16, 0, 20, "How many extra columns are displayed in the inventory screen");
 		
 		
-		int fullCols = 9 + ModSettings.MORE_COLS;
-		int fullRows = 3 + ModSettings.MORE_ROWS;
-		ModSettings.invoSize  = fullCols*fullRows;
+		ModSettings.fullCols = 9 + ModSettings.MORE_COLS;
+		ModSettings.fullRows = 3 + ModSettings.MORE_ROWS;
+		ModSettings.invoSize  = ModSettings.fullCols * ModSettings.fullRows;
 	 
 		config.save();
 		

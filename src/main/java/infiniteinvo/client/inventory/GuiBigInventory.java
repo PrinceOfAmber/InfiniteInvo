@@ -32,7 +32,18 @@ public class GuiBigInventory extends GuiInventory
 		this.ySize = yStart + (square * ModSettings.MORE_ROWS) + 29;
 
 	}
-	
+	@Override
+	public void initGui()
+    {
+		super.initGui();
+		
+		if(this.container != null && this.mc.playerController.isInCreativeMode() == false)
+		{
+			GuiButtonSam button = new GuiButtonSam(100, this.guiLeft + 120, this.guiTop + 2,50,15, "test",this.mc.thePlayer);
+			this.buttonList.add(button);
+			
+		}
+    }
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
 	{
@@ -128,8 +139,9 @@ public class GuiBigInventory extends GuiInventory
 	/**
 	 * -1 = Dragging outside scroll, 0 = Not dragging, 1 = Dragging from scroll
 	 */
-	public int dragging = 0;
 	
+	public int dragging = 0;
+	/*
     public void handleMouseInput() throws IOException
     {
     	super.handleMouseInput();
@@ -172,5 +184,5 @@ public class GuiBigInventory extends GuiInventory
         	
         	container.updateScroll();
     	}
-    }
+    }*/
 }

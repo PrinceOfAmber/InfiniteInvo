@@ -257,10 +257,9 @@ public class BigContainerPlayer extends ContainerPlayer
 
         this.craftResult.setInventorySlotContents(0, (ItemStack)null);
     }
-	//public boolean scrolldisabled=true;
+
 	public void updateScroll()
 	{
-		//if(scrolldisabled){return;}
 		if(scrollPos > MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)) - (3 + ModSettings.MORE_ROWS))
 		{
 			scrollPos = MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)) - (3 + ModSettings.MORE_ROWS);

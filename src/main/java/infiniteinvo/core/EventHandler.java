@@ -77,32 +77,7 @@ public class EventHandler
 			}
 		}
 	}
-	/*
-	@SubscribeEvent
-	public void onEntityLiving(LivingUpdateEvent event)
-	{
-		if(event.entityLiving instanceof EntityPlayer)
-		{
-			EntityPlayer player = (EntityPlayer)event.entityLiving;
-			
-			for(int i = 9; i < player.inventory.mainInventory.length; i++)
-			{
-				ItemStack stack = player.inventory.mainInventory[i];
-				
-				if(player.inventory instanceof BigInventoryPlayer && (i >= ((BigInventoryPlayer)player.inventory).getUnlockedSlots() || i - 9 >= ModSettings.invoSize) && !event.entityLiving.worldObj.isRemote && !player.capabilities.isCreativeMode)
-				{
-					
-					continue;
-				}
-			}
-			
-			if(!event.entityLiving.isEntityAlive())
-			{
-
-			}
-		}
-	}
-	*/
+ 
 	@SubscribeEvent
 	public void onEntityDeath(LivingDeathEvent event)
 	{
@@ -144,7 +119,8 @@ public class EventHandler
 			GuiContainer gui = (GuiContainer)event.gui;
 			Container container = gui.inventorySlots;
 			
-			//event.buttonList.add(new InvoScrollBar(256, 0, 0, 1, 1, "", container, gui));
+			//TODO: add buttons here when ready
+			//event.buttonList.add(new xxxxxxxxxxx(256, 0, 0, 1, 1, "", container, gui));
 		
 		}
 	}*/

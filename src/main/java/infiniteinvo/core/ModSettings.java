@@ -9,10 +9,11 @@ public class ModSettings
 {
 	public static NBTTagCompound cachedSettings = new NBTTagCompound();
 	
-	public static int invoSize = 52;
-
-	public static int MORE_ROWS = 1;
-	public static int MORE_COLS = 1;
+	public static int invoSize;
+	public static int MORE_ROWS;
+	public static int MORE_COLS;
+    public static int fullCols;// = 9 + ModSettings.MORE_COLS;
+    public static int fullRows;	//3 + ModSettings.MORE_ROWS;
 
 	public static void SaveToCache()
 	{
