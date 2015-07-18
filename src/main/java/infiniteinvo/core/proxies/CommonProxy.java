@@ -2,7 +2,6 @@ package infiniteinvo.core.proxies;
 
 import infiniteinvo.core.EventHandler;
 import infiniteinvo.core.InfiniteInvo;
-import infiniteinvo.network.InvoPacket;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;

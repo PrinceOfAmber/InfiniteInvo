@@ -1,22 +1,17 @@
 package infiniteinvo.core;
 
 import infiniteinvo.core.proxies.CommonProxy; 
-import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = InfiniteInvo.MODID, useMetadata=true/*, version = InfiniteInvo.VERSION, name = InfiniteInvo.NAME, guiFactory = "infiniteinvo.handlers.ConfigGuiFactory"*/)
 public class InfiniteInvo

@@ -3,9 +3,7 @@ package infiniteinvo.client.inventory;
 import java.io.IOException;
 
 import infiniteinvo.core.ModSettings;
-import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.inventory.BigContainerPlayer;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.resources.I18n;
@@ -13,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 
-import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 

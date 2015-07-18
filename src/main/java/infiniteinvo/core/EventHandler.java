@@ -1,11 +1,9 @@
 package infiniteinvo.core;
 
 import infiniteinvo.client.inventory.GuiBigInventory; 
-//import infiniteinvo.client.inventory.InvoScrollBar;
+import infiniteinvo.core.proxies.InvoPacket;
 import infiniteinvo.inventory.BigContainerPlayer;
-import infiniteinvo.inventory.BigInventoryPlayer;
 import infiniteinvo.inventory.InventoryPersistProperty;
-import infiniteinvo.network.InvoPacket;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,32 +13,22 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.client.event.GuiOpenEvent;
-import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
 import org.apache.logging.log4j.Level;
 
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -59,7 +47,7 @@ public class EventHandler
 			
 			if(InventoryPersistProperty.get(player) == null)
 			{
-				InventoryPersistProperty.Register(player);
+				InventoryPersistProperty.register(player);
 			}
 		}
 	}
@@ -89,7 +77,7 @@ public class EventHandler
 			}
 		}
 	}
-	
+	/*
 	@SubscribeEvent
 	public void onEntityLiving(LivingUpdateEvent event)
 	{
@@ -114,7 +102,7 @@ public class EventHandler
 			}
 		}
 	}
-	
+	*/
 	@SubscribeEvent
 	public void onEntityDeath(LivingDeathEvent event)
 	{
@@ -142,7 +130,7 @@ public class EventHandler
 			((BigContainerPlayer)Minecraft.getMinecraft().thePlayer.inventoryContainer).updateScroll();
 		}
 	}
-	
+	/*
 	@SuppressWarnings("unchecked")
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
@@ -159,7 +147,7 @@ public class EventHandler
 			//event.buttonList.add(new InvoScrollBar(256, 0, 0, 1, 1, "", container, gui));
 		
 		}
-	}
+	}*/
 	
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load event)

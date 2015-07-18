@@ -24,7 +24,7 @@ public class InventoryPersistProperty implements IExtendedEntityProperties
 	 */
 	public static HashMap<UUID, NBTTagList> keepInvoCache = new HashMap<UUID, NBTTagList>();
 	
-	public static void Register(EntityPlayer player)
+	public static void register(EntityPlayer player)
 	{
 		player.registerExtendedProperties(ID, new InventoryPersistProperty(player));
 	}

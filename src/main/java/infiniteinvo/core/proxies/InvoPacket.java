@@ -1,4 +1,4 @@
-package infiniteinvo.network;
+package infiniteinvo.core.proxies;
 
 import infiniteinvo.core.EventHandler;
 import infiniteinvo.core.ModSettings;
