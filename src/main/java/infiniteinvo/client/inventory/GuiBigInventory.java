@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11;
 public class GuiBigInventory extends GuiInventory
 {
 	BigContainerPlayer container;
-	GuiButton unlock;
+	//GuiButton unlock;
 	public boolean redoButtons = false;
 	
 	public GuiBigInventory(EntityPlayer player)
@@ -55,11 +55,11 @@ public class GuiBigInventory extends GuiInventory
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_)
 	{
-		if(unlock != null)
+		/*if(unlock != null)
 		{
 			unlock.xPosition = this.guiLeft + 87;
 			unlock.yPosition = this.guiTop + 7;
-		}
+		}*/
 		
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(new ResourceLocation("infiniteinvo", "textures/gui/adjustable_gui.png"));
