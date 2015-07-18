@@ -272,7 +272,7 @@ public class InvoScrollBar extends GuiButton
     		dragging = 0;
     	}
 		
-        mc.getTextureManager().bindTexture(new ResourceLocation("infiniteinvo", "textures/gui/adjustable_gui.png"));
+        mc.getTextureManager().bindTexture(new ResourceLocation("infiniteinvo", "textures/gui/inventory_gui_3.png"));
         
         if(maxScroll > 0)
         {
@@ -369,13 +369,14 @@ public class InvoScrollBar extends GuiButton
     			}
     			
     			// Debug stuffs that renders the slot IDs
-    			//this.drawString(mc.fontRenderer, "" + s.getSlotIndex(), s.xDisplayPosition + this.guiLeft, s.yDisplayPosition + this.guiTop + 4, 16777120);
-    	        //mc.getTextureManager().bindTexture(new ResourceLocation("infiniteinvo", "textures/gui/adjustable_gui.png"));
-                //GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    			if(debugNumber)
+    				this.drawString(mc.fontRendererObj, "" + s.getSlotIndex(), s.xDisplayPosition + this.guiLeft, s.yDisplayPosition + this.guiTop + 4, 16777120);
+    	        mc.getTextureManager().bindTexture(new ResourceLocation("infiniteinvo", "textures/gui/inventory_gui_3.png"));
+              //  GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         	}
         }
     }
-	
+	private boolean debugNumber=true;
 	public void doScroll(int scrollDX)
 	{
 		if(!enabled)
