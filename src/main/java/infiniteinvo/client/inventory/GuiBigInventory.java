@@ -39,7 +39,7 @@ public class GuiBigInventory extends GuiInventory
 		
 		if(this.container != null && this.mc.playerController.isInCreativeMode() == false)
 		{
-			GuiButtonSam button = new GuiButtonSam(100, this.guiLeft + 170, this.guiTop + 8,50,15, "ender",this.mc.thePlayer);
+			GuiButtonSam button = new GuiButtonSam(100, this.guiLeft + 250, this.guiTop + 8,90,20, "Ender Chest",this.mc.thePlayer);
 			this.buttonList.add(button);
 			
 		}
@@ -100,7 +100,7 @@ public class GuiBigInventory extends GuiInventory
 	}
 	
 	@Override
-	public void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_)
+	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		if(showText)
 			this.fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 87, 32, 4210752);
