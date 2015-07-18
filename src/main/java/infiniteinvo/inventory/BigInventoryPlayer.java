@@ -1,7 +1,10 @@
 package infiniteinvo.inventory;
 
 import infiniteinvo.core.ModSettings;
+
 import java.util.concurrent.Callable;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,10 +51,10 @@ public class BigInventoryPlayer extends InventoryPlayer
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) // TODO: Creative inventory middle click fix
     {
-		/*if(this.player.capabilities.isCreativeMode && this.player.worldObj.isRemote)
+		if(this.player.capabilities.isCreativeMode && this.player.worldObj.isRemote)
 		{
             Minecraft.getMinecraft().playerController.sendSlotPacket(stack, slot);
-		}*/
+		}
 		
 		super.setInventorySlotContents(slot, stack);
     }

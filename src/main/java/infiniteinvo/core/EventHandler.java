@@ -1,7 +1,7 @@
 package infiniteinvo.core;
 
 import infiniteinvo.client.inventory.GuiBigInventory; 
-import infiniteinvo.client.inventory.InvoScrollBar;
+//import infiniteinvo.client.inventory.InvoScrollBar;
 import infiniteinvo.inventory.BigContainerPlayer;
 import infiniteinvo.inventory.BigInventoryPlayer;
 import infiniteinvo.inventory.InventoryPersistProperty;
@@ -156,7 +156,7 @@ public class EventHandler
 			GuiContainer gui = (GuiContainer)event.gui;
 			Container container = gui.inventorySlots;
 			
-			event.buttonList.add(new InvoScrollBar(256, 0, 0, 1, 1, "", container, gui));
+			//event.buttonList.add(new InvoScrollBar(256, 0, 0, 1, 1, "", container, gui));
 		
 		}
 	}

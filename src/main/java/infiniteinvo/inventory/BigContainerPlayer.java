@@ -257,9 +257,10 @@ public class BigContainerPlayer extends ContainerPlayer
 
         this.craftResult.setInventorySlotContents(0, (ItemStack)null);
     }
-	
+	//public boolean scrolldisabled=true;
 	public void updateScroll()
 	{
+		//if(scrolldisabled){return;}
 		if(scrollPos > MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)) - (3 + ModSettings.MORE_ROWS))
 		{
 			scrollPos = MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)) - (3 + ModSettings.MORE_ROWS);
@@ -270,11 +271,12 @@ public class BigContainerPlayer extends ContainerPlayer
 			scrollPos = 0;
 		}
 		
-		for(int i = 0; i < MathHelper.ceiling_float_int((float)MathHelper.clamp_int(ModSettings.invoSize, 27, Integer.MAX_VALUE)/(float)(9 + ModSettings.MORE_COLS)); i++)
+		for(int i = 0; i < MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)); i++)
 		{
             for (int j = 0; j < 9 + ModSettings.MORE_COLS; ++j)
             {
             	int index = j + (i * (9 + ModSettings.MORE_COLS));
+            	//System.out.println("updateScroll from "+scrollPos+"::"+index);
             	if(index >= ModSettings.invoSize && index >= 27)
             	{
             		break;

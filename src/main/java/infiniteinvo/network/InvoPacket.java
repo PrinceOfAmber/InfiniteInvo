@@ -205,7 +205,9 @@ public class InvoPacket implements IMessage
 							{
 								((SlotLockable)s).slotIndex = sInx + (scrollPos * 9);
 							}*/
-							
+							//instead aof above do this
+							s.slotNumber = sInx + (scrollPos * 9);
+							s.onSlotChanged();
 							//s.putStack(new ItemStack(Blocks.stone, s.getSlotIndex())); // Debugging to visualise the location and slot indexes serverside
 							
 							if(flag && container.getSlotFromInventory(player.inventory, player.inventory.currentItem) == null)
