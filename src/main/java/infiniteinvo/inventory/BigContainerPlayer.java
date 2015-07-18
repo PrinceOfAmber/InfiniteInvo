@@ -42,6 +42,11 @@ public class BigContainerPlayer extends ContainerPlayer
 		inventorySlots = Lists.newArrayList();//undo everything done by super()
 		craftMatrix = new InventoryCrafting(this, craftSize, craftSize);
 
+        boolean onHold = false;
+        int[] holdSlot = new int[5];
+        int[] holdX = new int[5];
+        int[] holdY = new int[5];
+        int h = 0;
 
 
 		int shiftxOut = 9;
@@ -64,14 +69,28 @@ public class BigContainerPlayer extends ContainerPlayer
 
         for (i = 0; i < craftSize; ++i)
         {
+        	onHold = false;
+        	if( i == this.craftSize-1) onHold = true; //hold right and bottom column
+        	
             for (j = 0; j < craftSize; ++j)
             {
+            	if(j == this.craftSize-1)onHold = true; //hold right and bottom column
+            	
             	slotNumber = j + i * this.craftSize;
             
             	cx = 88 + j * GuiBigInventory.square + shiftx;
             	cy = 26 + i * GuiBigInventory.square + shifty;
-            	
-                this.addSlotToContainer(new Slot(this.craftMatrix, slotNumber, cx , cy));
+            	if(this.craftSize == 3 && onHold)
+            	{
+            		//save these to add at the end
+            		//System.out.println("on hold "+slotNumber);
+            		holdSlot[h] = slotNumber;
+            		holdX[h] = cx;
+            		holdY[h] = cy;
+            		h++;
+            	}
+            	else
+            		this.addSlotToContainer(new Slot(this.craftMatrix, slotNumber, cx , cy));
                 //j + i * 2, 88 + j * 18, 26 + i * 18));
             }
         }
@@ -189,7 +208,19 @@ public class BigContainerPlayer extends ContainerPlayer
             	}
             }
         }
-        
+        if(craftSize == 3)// Finally, add the five new slots to the 3x3 crafting grid (they end up being 45-49 inclusive)
+        {
+	        for(h = 0; h < 5; ++h)
+	        {
+	        	slotNumber = holdSlot[h];
+	    		cx = holdX[h];
+	    		cy = holdY[h];
+	    		Slot ns = new Slot(this.craftMatrix, slotNumber, cx , cy );
+	        	this.addSlotToContainer(ns);
+	          	System.out.println("("+slotNumber+","+cx+","+cy+" -from hold);");
+	        	crafting[3+h] = ns;
+	        }
+        }
         this.UpdateScroll();
 	}
 	
