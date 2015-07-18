@@ -75,7 +75,7 @@ public class EventHandler
 			{
 				InventoryPersistProperty.get(player).onJoinWorld();
 			}
-			/*
+			
 			if(event.world.isRemote)
 			{
 				NBTTagCompound requestTags = new NBTTagCompound();
@@ -86,7 +86,7 @@ public class EventHandler
 			} else
 			{
 				ModSettings.LoadFromCache();
-			}*/
+			}
 		}
 	}
 	
@@ -157,14 +157,7 @@ public class EventHandler
 			Container container = gui.inventorySlots;
 			
 			event.buttonList.add(new InvoScrollBar(256, 0, 0, 1, 1, "", container, gui));
-			
-			if(event.gui instanceof GuiInventory)
-			{
-				final ScaledResolution scaledresolution = new ScaledResolution(event.gui.mc, event.gui.mc.displayWidth, event.gui.mc.displayHeight);
-                int i = scaledresolution.getScaledWidth();
-                int j = scaledresolution.getScaledHeight();
-			//	event.buttonList.add(new GuiButtonUnlockSlot(event.buttonList.size(), i/2 - 50, j - 40, 100, 20, event.gui.mc.thePlayer));
-			}
+		
 		}
 	}
 	

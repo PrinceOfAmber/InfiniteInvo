@@ -70,34 +70,17 @@ public class InvoPacket implements IMessage
 					}
 
 					int unlocked = player.getEntityData().getInteger("INFINITE_INVO_UNLOCKED");
-				//	int cost = II_Settings.unlockCost + (unlocked * II_Settings.unlockIncrease);
-			//		int totalXP = XPHelper.getPlayerXP(player);
+		
 					int totalXP= 0 ;
 					if(totalXP >= -99)
 					{
-						/*
-						if(II_Settings.useOrbs)
-						{
-							XPHelper.AddXP(player, -cost);
-						} else
-						{
-							XPHelper.AddXP(player, -XPHelper.getLevelXP(cost));
-						}*/
+				
 						
 						unlocked++;
 						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", unlocked);
 						
 						EventHandler.unlockCache.put(player.getName(), unlocked);//player.getCommandSenderName()
-						
-						/*if(unlocked > 0 || !II_Settings.xpUnlock)
-						{
-							player.addStat(InvoAchievements.unlockFirst, 1);
-						}*/
-						
-						/*if(unlocked + II_Settings.unlockedSlots == II_Settings.invoSize || !II_Settings.xpUnlock)
-						{
-							player.addStat(InvoAchievements.unlockAll, 1);
-						}*/
+				
 						
 						NBTTagCompound replyTags = new NBTTagCompound();
 						replyTags.setInteger("ID", 0);
@@ -141,15 +124,7 @@ public class InvoPacket implements IMessage
 						EventHandler.unlockCache.put(player.getUniqueID().toString(), unlocked);
 					}
 					
-					/*if(unlocked > 0 || !II_Settings.xpUnlock)
-					{
-						player.addStat(InvoAchievements.unlockFirst, 1);
-					}
-					
-					if(unlocked + II_Settings.unlockedSlots >= II_Settings.invoSize || !II_Settings.xpUnlock)
-					{
-						player.addStat(InvoAchievements.unlockAll, 1);
-					}*/
+		
 					NBTTagCompound cachedSettings = new NBTTagCompound();
 					cachedSettings.setInteger("invoSize", ModSettings.invoSize);
 					NBTTagCompound reply = new NBTTagCompound();
@@ -271,12 +246,12 @@ public class InvoPacket implements IMessage
 						InfiniteInvo.logger.log(Level.INFO, "Loading serverside unlocks...");
 						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", message.tags.getInteger(InfiniteInvo.NBT_Unlocked));
 					}
-					/*
+					
 					if(message.tags.hasKey(InfiniteInvo.NBT_Settings))
 					{
 						InfiniteInvo.logger.log(Level.INFO, "Loading serverside settings...");
 						ModSettings.LoadFromTags(message.tags.getCompoundTag(InfiniteInvo.NBT_Settings));
-					}*/
+					}
 				}
 			}
 			return null;

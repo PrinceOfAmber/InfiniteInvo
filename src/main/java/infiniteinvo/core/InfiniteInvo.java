@@ -60,7 +60,7 @@ public class InfiniteInvo
 	 
 		config.save();
 		
-	//	ModSettings.SaveToCache();
+		ModSettings.SaveToCache();
 		
     	
     	proxy.registerHandlers();
