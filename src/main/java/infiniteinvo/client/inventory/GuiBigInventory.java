@@ -6,10 +6,12 @@ import infiniteinvo.core.ModSettings;
 import infiniteinvo.inventory.BigContainerPlayer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
+ 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -39,7 +41,7 @@ public class GuiBigInventory extends GuiInventory
 		
 		if(this.container != null && this.mc.playerController.isInCreativeMode() == false)
 		{
-			GuiButtonSam button = new GuiButtonSam(100, this.guiLeft + 250, this.guiTop + 8,90,20, "Ender Chest",this.mc.thePlayer);
+			GuiButtonSam button = new GuiButtonSam(100, this.guiLeft + 280, this.guiTop + 10,90,20, StatCollector.translateToLocal("tile.enderChest.name"),this.mc.thePlayer);
 			this.buttonList.add(button);
 			
 		}
