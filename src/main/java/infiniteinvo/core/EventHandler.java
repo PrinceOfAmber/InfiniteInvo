@@ -139,7 +139,7 @@ public class EventHandler
 		{
 			// Reset scroll and inventory slot positioning to make sure it doesn't screw up later
 			((BigContainerPlayer)Minecraft.getMinecraft().thePlayer.inventoryContainer).scrollPos = 0;
-			((BigContainerPlayer)Minecraft.getMinecraft().thePlayer.inventoryContainer).UpdateScroll();
+			((BigContainerPlayer)Minecraft.getMinecraft().thePlayer.inventoryContainer).updateScroll();
 		}
 	}
 	

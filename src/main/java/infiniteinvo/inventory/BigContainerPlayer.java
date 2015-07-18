@@ -223,7 +223,7 @@ public class BigContainerPlayer extends ContainerPlayer
 	        	crafting[3+h] = ns;
 	        }
         }
-        this.UpdateScroll();
+        this.updateScroll();
 	}
 	
 	@Override
@@ -239,7 +239,26 @@ public class BigContainerPlayer extends ContainerPlayer
 		return slot;
 	}
 	
-	public void UpdateScroll()
+	
+	@Override
+    public void onContainerClosed(EntityPlayer playerIn)
+    {
+        super.onContainerClosed(playerIn);
+//from  https://github.com/PrinceOfAmber/SamsPowerups
+        for (int i = 0; i < craftSize*craftSize; ++i) // was 4
+        {
+            ItemStack itemstack = this.craftMatrix.getStackInSlotOnClosing(i);
+
+            if (itemstack != null)
+            {
+                playerIn.dropPlayerItemWithRandomChoice(itemstack, false);
+            }
+        }
+
+        this.craftResult.setInventorySlotContents(0, (ItemStack)null);
+    }
+	
+	public void updateScroll()
 	{
 		if(scrollPos > MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)) - (3 + ModSettings.MORE_ROWS))
 		{

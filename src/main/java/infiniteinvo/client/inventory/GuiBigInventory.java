@@ -127,6 +127,7 @@ public class GuiBigInventory extends GuiInventory
 		}
 	}
     
+
 	/**
 	 * -1 = Dragging outside scroll, 0 = Not dragging, 1 = Dragging from scroll
 	 */
@@ -172,7 +173,7 @@ public class GuiBigInventory extends GuiInventory
         		dragging = 0;
         	}
         	
-        	container.UpdateScroll();
+        	container.updateScroll();
     	}
     }
 }
