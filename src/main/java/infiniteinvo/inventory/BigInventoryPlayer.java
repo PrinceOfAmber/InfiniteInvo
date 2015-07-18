@@ -1,6 +1,6 @@
 package infiniteinvo.inventory;
 
-import infiniteinvo.core.II_Settings;
+import infiniteinvo.core.ModSettings;
 import java.util.concurrent.Callable;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
@@ -23,7 +23,7 @@ public class BigInventoryPlayer extends InventoryPlayer
 	public BigInventoryPlayer(EntityPlayer player)
 	{
 		super(player);
-		this.mainInventory = new ItemStack[MathHelper.clamp_int(II_Settings.invoSize, 27, Integer.MAX_VALUE - 100) + 9];
+		this.mainInventory = new ItemStack[MathHelper.clamp_int(ModSettings.invoSize, 27, Integer.MAX_VALUE - 100) + 9];
 		
 		if(player.inventory != null)
 		{
@@ -387,7 +387,7 @@ public class BigInventoryPlayer extends InventoryPlayer
 	@Override
     public void readFromNBT(NBTTagList p_70443_1_)
     {
-        this.mainInventory = new ItemStack[MathHelper.clamp_int(II_Settings.invoSize, 27, Integer.MAX_VALUE - 100) + 9];
+        this.mainInventory = new ItemStack[MathHelper.clamp_int(ModSettings.invoSize, 27, Integer.MAX_VALUE - 100) + 9];
         this.armorInventory = new ItemStack[armorInventory == null? 4 : armorInventory.length]; // Just in case it isn't standard size
         
         for (int i = 0; i < p_70443_1_.tagCount(); ++i)

@@ -1,6 +1,6 @@
 package infiniteinvo.network;
 
-import infiniteinvo.core.II_Settings;
+import infiniteinvo.core.ModSettings;
 import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.core.XPHelper;
 import infiniteinvo.handlers.EventHandler;
@@ -155,7 +155,7 @@ public class InvoPacket implements IMessage
 					reply.setInteger("ID", 0);
 					reply.setString("Player", player.getName());
 					reply.setInteger("Unlocked", unlocked);
-					reply.setTag("Settings", II_Settings.cachedSettings);
+					reply.setTag("Settings", ModSettings.cachedSettings);
 					return new InvoPacket(reply);
 				} else if(message.tags.getInteger("ID") == 2) // Experimental
 				{
@@ -272,7 +272,7 @@ public class InvoPacket implements IMessage
 					if(message.tags.hasKey(InfiniteInvo.NBT_Settings))
 					{
 						InfiniteInvo.logger.log(Level.INFO, "Loading serverside settings...");
-						II_Settings.LoadFromTags(message.tags.getCompoundTag(InfiniteInvo.NBT_Settings));
+						ModSettings.LoadFromTags(message.tags.getCompoundTag(InfiniteInvo.NBT_Settings));
 					}
 				}
 			}

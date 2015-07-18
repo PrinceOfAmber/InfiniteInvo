@@ -2,7 +2,7 @@ package infiniteinvo.handlers;
 
 import infiniteinvo.client.inventory.GuiBigInventory; 
 import infiniteinvo.client.inventory.InvoScrollBar;
-import infiniteinvo.core.II_Settings;
+import infiniteinvo.core.ModSettings;
 import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.inventory.BigContainerPlayer;
 import infiniteinvo.inventory.BigInventoryPlayer;
@@ -83,7 +83,7 @@ public class EventHandler
 				InfiniteInvo.instance.network.sendToServer(new InvoPacket(requestTags));
 			} else
 			{
-				II_Settings.LoadFromCache();
+				ModSettings.LoadFromCache();
 			}
 		}/* else if(event.entity instanceof EntityItem)
 		{
@@ -131,7 +131,7 @@ public class EventHandler
 			{
 				ItemStack stack = player.inventory.mainInventory[i];
 				
-				if(player.inventory instanceof BigInventoryPlayer && (i >= ((BigInventoryPlayer)player.inventory).getUnlockedSlots() || i - 9 >= II_Settings.invoSize) && !event.entityLiving.worldObj.isRemote && !player.capabilities.isCreativeMode)
+				if(player.inventory instanceof BigInventoryPlayer && (i >= ((BigInventoryPlayer)player.inventory).getUnlockedSlots() || i - 9 >= ModSettings.invoSize) && !event.entityLiving.worldObj.isRemote && !player.capabilities.isCreativeMode)
 				{
 					/*
 					if(stack != null && stack.getItem() != InfiniteInvo.locked)

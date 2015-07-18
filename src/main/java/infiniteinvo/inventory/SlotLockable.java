@@ -1,7 +1,7 @@
 package infiniteinvo.inventory;
 
 import org.apache.logging.log4j.Level;
-import infiniteinvo.core.II_Settings;
+import infiniteinvo.core.ModSettings;
 import infiniteinvo.core.InfiniteInvo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -119,7 +119,7 @@ public class SlotLockable extends Slot
 			return true;
 		} else
 		{
-			return invo.getUnlockedSlots() > this.slotIndex && this.slotIndex - 9 < II_Settings.invoSize;
+			return invo.getUnlockedSlots() > this.slotIndex && this.slotIndex - 9 < ModSettings.invoSize;
 		}
 	}
 }

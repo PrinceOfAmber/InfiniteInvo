@@ -1,6 +1,6 @@
 package infiniteinvo.client.inventory;
 
-import infiniteinvo.core.II_Settings;
+import infiniteinvo.core.ModSettings;
 import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.inventory.BigInventoryPlayer;
 import infiniteinvo.inventory.SlotLockable;
@@ -75,7 +75,7 @@ public class InvoScrollBar extends GuiButton
 		{
 			Slot s = (Slot)container.inventorySlots.get(i);
 			
-			if(s.inventory == Minecraft.getMinecraft().thePlayer.inventory && s.getSlotIndex() >= 9 && s.getSlotIndex() < (II_Settings.invoSize < 27? 27 : II_Settings.invoSize) + 9)
+			if(s.inventory == Minecraft.getMinecraft().thePlayer.inventory && s.getSlotIndex() >= 9 && s.getSlotIndex() < (ModSettings.invoSize < 27? 27 : ModSettings.invoSize) + 9)
 			{
 				if(s.getClass() != Slot.class && s.getClass() != SlotLockable.class)
 				{
@@ -114,12 +114,12 @@ public class InvoScrollBar extends GuiButton
 		
 		container.detectAndSendChanges();
 		
-		if(II_Settings.invoSize <= 27)
+		if(ModSettings.invoSize <= 27)
 		{
 			maxScroll = 0;
 		} else
 		{
-			maxScroll = MathHelper.ceiling_float_int((float)(II_Settings.invoSize - 27)/9F);
+			maxScroll = MathHelper.ceiling_float_int((float)(ModSettings.invoSize - 27)/9F);
 		}
 		
 		return true;
@@ -141,7 +141,7 @@ public class InvoScrollBar extends GuiButton
 		{
 			Slot s = (Slot)container.inventorySlots.get(i);
 			
-			if(s.inventory == Minecraft.getMinecraft().thePlayer.inventory && s.getSlotIndex() >= 9 && s.getSlotIndex() < II_Settings.invoSize + 27)
+			if(s.inventory == Minecraft.getMinecraft().thePlayer.inventory && s.getSlotIndex() >= 9 && s.getSlotIndex() < ModSettings.invoSize + 27)
 			{
 				if(s.getSlotIndex() >= 36 && s.getSlotIndex() < 36 + 9)
 				{
@@ -351,7 +351,7 @@ public class InvoScrollBar extends GuiButton
     					return;
     				}
     				
-        			if(s.getSlotIndex() - 9 >= II_Settings.invoSize)
+        			if(s.getSlotIndex() - 9 >= ModSettings.invoSize)
         			{
         				s.xDisplayPosition = -999;
         				s.yDisplayPosition = -999;
