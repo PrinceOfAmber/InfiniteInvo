@@ -15,10 +15,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import org.apache.logging.log4j.Level;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class InvoPacket implements IMessage
 {
@@ -87,7 +87,7 @@ public class InvoPacket implements IMessage
 						unlocked++;
 						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", unlocked);
 						
-						EventHandler.unlockCache.put(player.getCommandSenderName(), unlocked);
+						EventHandler.unlockCache.put(player.getName(), unlocked);//player.getCommandSenderName()
 						
 						/*if(unlocked > 0 || !II_Settings.xpUnlock)
 						{
@@ -101,7 +101,7 @@ public class InvoPacket implements IMessage
 						
 						NBTTagCompound replyTags = new NBTTagCompound();
 						replyTags.setInteger("ID", 0);
-						replyTags.setString("Player", player.getCommandSenderName());
+						replyTags.setString("Player", player.getName());//player.getCommandSenderName()
 						replyTags.setInteger("Unlocked", unlocked);
 						return new InvoPacket(replyTags);
 						
@@ -126,13 +126,13 @@ public class InvoPacket implements IMessage
 					
 					int unlocked = 0;
 					
-					if(!player.getEntityData().hasKey("INFINITE_INVO_UNLOCKED") && (EventHandler.unlockCache.containsKey(player.getCommandSenderName()) || EventHandler.unlockCache.containsKey(player.getUniqueID().toString())))
+					if(!player.getEntityData().hasKey("INFINITE_INVO_UNLOCKED") && (EventHandler.unlockCache.containsKey(player.getName()) || EventHandler.unlockCache.containsKey(player.getUniqueID().toString())))
 					{
-						unlocked = EventHandler.unlockCache.containsKey(player.getCommandSenderName())? EventHandler.unlockCache.get(player.getCommandSenderName()) : EventHandler.unlockCache.get(player.getUniqueID().toString());
-						if(EventHandler.unlockCache.containsKey(player.getCommandSenderName()))
+						unlocked = EventHandler.unlockCache.containsKey(player.getName())? EventHandler.unlockCache.get(player.getName()) : EventHandler.unlockCache.get(player.getUniqueID().toString());
+						if(EventHandler.unlockCache.containsKey(player.getName()))
 						{
 							EventHandler.unlockCache.put(player.getUniqueID().toString(), unlocked);
-							EventHandler.unlockCache.remove(player.getCommandSenderName());
+							EventHandler.unlockCache.remove(player.getName());
 						}
 						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", unlocked);
 					} else
@@ -153,7 +153,7 @@ public class InvoPacket implements IMessage
 					
 					NBTTagCompound reply = new NBTTagCompound();
 					reply.setInteger("ID", 0);
-					reply.setString("Player", player.getCommandSenderName());
+					reply.setString("Player", player.getName());
 					reply.setInteger("Unlocked", unlocked);
 					reply.setTag("Settings", II_Settings.cachedSettings);
 					return new InvoPacket(reply);
@@ -245,33 +245,34 @@ public class InvoPacket implements IMessage
 		}
 	}
 	
+
 	public static class HandleClient implements IMessageHandler<InvoPacket,IMessage>
 	{
 		@Override
 		public IMessage onMessage(InvoPacket message, MessageContext ctx)
 		{
-			if(message.tags.hasKey("ID"))
+			if(message.tags.hasKey(InfiniteInvo.NBT_ID))
 			{
-				if(message.tags.getInteger("ID") == 0)
+				if(message.tags.getInteger(InfiniteInvo.NBT_ID) == 0)
 				{
 					EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 					
-					if(!message.tags.hasKey("Player") || !message.tags.getString("Player").equals(player.getCommandSenderName()))
+					if(!message.tags.hasKey(InfiniteInvo.NBT_PLAYER) || !message.tags.getString(InfiniteInvo.NBT_PLAYER).equals(player.getName()))
 					{
-						InfiniteInvo.logger.log(Level.ERROR, "Server sent packet to the wrong player! Intended target: " + message.tags.getString("Player") + ", Recipient: " + player.getCommandSenderName());
+						InfiniteInvo.logger.log(Level.ERROR, "Server sent packet to the wrong player! Intended target: " + message.tags.getString(InfiniteInvo.NBT_PLAYER) + ", Recipient: " + player.getName());
 						return null;
 					}
 					
-					if(message.tags.hasKey("Unlocked"))
+					if(message.tags.hasKey(InfiniteInvo.NBT_Unlocked))
 					{
 						InfiniteInvo.logger.log(Level.INFO, "Loading serverside unlocks...");
-						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", message.tags.getInteger("Unlocked"));
+						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", message.tags.getInteger(InfiniteInvo.NBT_Unlocked));
 					}
 					
-					if(message.tags.hasKey("Settings"))
+					if(message.tags.hasKey(InfiniteInvo.NBT_Settings))
 					{
 						InfiniteInvo.logger.log(Level.INFO, "Loading serverside settings...");
-						II_Settings.LoadFromTags(message.tags.getCompoundTag("Settings"));
+						II_Settings.LoadFromTags(message.tags.getCompoundTag(InfiniteInvo.NBT_Settings));
 					}
 				}
 			}

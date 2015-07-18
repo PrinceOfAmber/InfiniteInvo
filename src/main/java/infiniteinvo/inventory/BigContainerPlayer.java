@@ -97,7 +97,8 @@ public class BigContainerPlayer extends ContainerPlayer
 		if(slot == null)
 		{
 			Exception e = new NullPointerException();
-			InfiniteInvo.logger.log(Level.FATAL, e.getStackTrace()[1].getClassName() + "." + e.getStackTrace()[1].getMethodName() + ":" + e.getStackTrace()[1].getLineNumber() + " is requesting slot " + id + " from inventory " + invo.getInventoryName() + " (" + invo.getClass().getName() + ") and got NULL!", e);
+			 
+			InfiniteInvo.logger.log(Level.FATAL, e.getStackTrace()[1].getClassName() + "." + e.getStackTrace()[1].getMethodName() + ":" + e.getStackTrace()[1].getLineNumber() + " is requesting slot " + id + " from inventory " + invo.getName() + " (" + invo.getClass().getName() + ") and got NULL!", e);
 		}
 		return slot;
 	}

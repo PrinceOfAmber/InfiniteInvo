@@ -36,11 +36,11 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import org.apache.logging.log4j.Level;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EventHandler
 {
@@ -77,9 +77,9 @@ public class EventHandler
 			if(event.world.isRemote)
 			{
 				NBTTagCompound requestTags = new NBTTagCompound();
-				requestTags.setInteger("ID", 1);
-				requestTags.setInteger("World", event.world.provider.dimensionId);
-				requestTags.setString("Player", player.getCommandSenderName());
+				requestTags.setInteger(InfiniteInvo.NBT_ID, 1);
+				requestTags.setInteger(InfiniteInvo.NBT_WORLD, event.world.provider.getDimensionId());
+				requestTags.setString(InfiniteInvo.NBT_PLAYER, player.getName());
 				InfiniteInvo.instance.network.sendToServer(new InvoPacket(requestTags));
 			} else
 			{

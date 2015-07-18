@@ -1,5 +1,7 @@
 package infiniteinvo.client.inventory;
 
+import java.io.IOException;
+
 import infiniteinvo.core.II_Settings;
 import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.inventory.BigContainerPlayer;
@@ -10,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+
 import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -107,9 +110,9 @@ public class GuiBigInventory extends GuiInventory
         }
         
         this.drawTexturedModalRect(k + 169 + (II_Settings.extraColumns * 18), l + 137 + (II_Settings.extraRows * 18), 187 + barW, 137, 16 - barW, 29);
-        
-        func_147046_a(k + 51, l + 75, 30, (float)(k + 51) - (float)p_146976_2_, (float)(l + 75 - 50) - (float)p_146976_3_, this.mc.thePlayer);
-        
+       // func_147046_a
+        drawEntityOnScreen(k + 51, l + 75, 30, (float)(k + 51) - (float)p_146976_2_, (float)(l + 75 - 50) - (float)p_146976_3_, this.mc.thePlayer);
+       
         if(redoButtons)
         {
         	redoButtons = false;
@@ -176,10 +179,10 @@ public class GuiBigInventory extends GuiInventory
 	 */
 	public int dragging = 0;
 	
-    public void handleMouseInput()
+    public void handleMouseInput() throws IOException
     {
     	super.handleMouseInput();
-    	
+    
     	if(container != null)
     	{
         	int scrollDir = (int)Math.signum(Mouse.getDWheel());
