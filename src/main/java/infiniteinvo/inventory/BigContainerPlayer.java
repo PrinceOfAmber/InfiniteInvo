@@ -175,8 +175,8 @@ public class BigContainerPlayer extends ContainerPlayer
 		}
 		
 		result = (Slot)this.inventorySlots.get(0);
-		result.xDisplayPosition = 144 +shiftxOut-5;
-		result.yDisplayPosition = 53 +shiftyOut-19; //TODO: fix these numbers
+		result.xDisplayPosition = 144 +shiftxOut-1;
+		result.yDisplayPosition = 53 +shiftyOut-17; //TODO: fix these numbers
 		int samup = 23;
 		int samleft = 7;
 		for( i = 0; i < 4; i++)
