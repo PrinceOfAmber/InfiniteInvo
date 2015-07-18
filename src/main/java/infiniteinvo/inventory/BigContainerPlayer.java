@@ -21,7 +21,7 @@ import com.google.common.collect.Lists;
 
 public class BigContainerPlayer extends ContainerPlayer
 {
-	private int craftSize = 2;//did not exist before, was magic'd as 2 everywhere
+	private int craftSize = 3;//did not exist before, was magic'd as 2 everywhere
 	public int scrollPos = 0;
 	public BigInventoryPlayer invo;
     public boolean isLocalWorld;
@@ -177,12 +177,13 @@ public class BigContainerPlayer extends ContainerPlayer
 		result = (Slot)this.inventorySlots.get(0);
 		result.xDisplayPosition = 144;
 		result.yDisplayPosition = 53;
-		
+		int samup = 23;
+		int samleft = 8;
 		for( i = 0; i < 4; i++)
 		{
 			Slot hs = crafting[i];
-			hs.xDisplayPosition = 88 + ((i%2) * 18);
-			hs.yDisplayPosition = 43 + ((i/2) * 18);
+			hs.xDisplayPosition = 88 + ((i%2) * 18)-samleft;
+			hs.yDisplayPosition = 43 + ((i/2) * 18)-samup;
 		}
 		
 		for( i = 0; i < 9; i++)
@@ -212,9 +213,10 @@ public class BigContainerPlayer extends ContainerPlayer
         {
 	        for(h = 0; h < 5; ++h)
 	        {
+	        	samup=6;
 	        	slotNumber = holdSlot[h];
 	    		cx = holdX[h];
-	    		cy = holdY[h];
+	    		cy = holdY[h]-samup;
 	    		Slot ns = new Slot(this.craftMatrix, slotNumber, cx , cy );
 	        	this.addSlotToContainer(ns);
 	          	System.out.println("("+slotNumber+","+cx+","+cy+" -from hold);");

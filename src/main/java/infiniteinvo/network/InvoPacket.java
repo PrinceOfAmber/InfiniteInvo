@@ -1,11 +1,9 @@
 package infiniteinvo.network;
 
+import infiniteinvo.core.EventHandler;
 import infiniteinvo.core.ModSettings;
 import infiniteinvo.core.InfiniteInvo;
-import infiniteinvo.core.XPHelper;
-import infiniteinvo.handlers.EventHandler;
 import infiniteinvo.inventory.BigInventoryPlayer;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +12,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
+
 import org.apache.logging.log4j.Level;
+
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -71,8 +71,8 @@ public class InvoPacket implements IMessage
 
 					int unlocked = player.getEntityData().getInteger("INFINITE_INVO_UNLOCKED");
 				//	int cost = II_Settings.unlockCost + (unlocked * II_Settings.unlockIncrease);
-					int totalXP = XPHelper.getPlayerXP(player);
-					
+			//		int totalXP = XPHelper.getPlayerXP(player);
+					int totalXP= 0 ;
 					if(totalXP >= -99)
 					{
 						/*
@@ -150,12 +150,14 @@ public class InvoPacket implements IMessage
 					{
 						player.addStat(InvoAchievements.unlockAll, 1);
 					}*/
-					
+					NBTTagCompound cachedSettings = new NBTTagCompound();
+					cachedSettings.setInteger("invoSize", ModSettings.invoSize);
 					NBTTagCompound reply = new NBTTagCompound();
 					reply.setInteger("ID", 0);
 					reply.setString("Player", player.getName());
 					reply.setInteger("Unlocked", unlocked);
-					reply.setTag("Settings", ModSettings.cachedSettings);
+					reply.setTag("Settings", cachedSettings);
+					
 					return new InvoPacket(reply);
 				} else if(message.tags.getInteger("ID") == 2) // Experimental
 				{
@@ -269,12 +271,12 @@ public class InvoPacket implements IMessage
 						InfiniteInvo.logger.log(Level.INFO, "Loading serverside unlocks...");
 						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", message.tags.getInteger(InfiniteInvo.NBT_Unlocked));
 					}
-					
+					/*
 					if(message.tags.hasKey(InfiniteInvo.NBT_Settings))
 					{
 						InfiniteInvo.logger.log(Level.INFO, "Loading serverside settings...");
 						ModSettings.LoadFromTags(message.tags.getCompoundTag(InfiniteInvo.NBT_Settings));
-					}
+					}*/
 				}
 			}
 			return null;

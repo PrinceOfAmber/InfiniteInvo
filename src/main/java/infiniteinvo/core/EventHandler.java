@@ -1,19 +1,19 @@
-package infiniteinvo.handlers;
+package infiniteinvo.core;
 
 import infiniteinvo.client.inventory.GuiBigInventory; 
 import infiniteinvo.client.inventory.InvoScrollBar;
-import infiniteinvo.core.ModSettings;
-import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.inventory.BigContainerPlayer;
 import infiniteinvo.inventory.BigInventoryPlayer;
 import infiniteinvo.inventory.InventoryPersistProperty;
 import infiniteinvo.network.InvoPacket;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -35,7 +35,9 @@ import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.world.WorldEvent;
+
 import org.apache.logging.log4j.Level;
+
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
@@ -73,7 +75,7 @@ public class EventHandler
 			{
 				InventoryPersistProperty.get(player).onJoinWorld();
 			}
-			
+			/*
 			if(event.world.isRemote)
 			{
 				NBTTagCompound requestTags = new NBTTagCompound();
@@ -84,41 +86,9 @@ public class EventHandler
 			} else
 			{
 				ModSettings.LoadFromCache();
-			}
-		}/* else if(event.entity instanceof EntityItem)
-		{
-			EntityItem itemDrop = (EntityItem)event.entity;
-			
-			if(itemDrop.getEntityItem() != null && itemDrop.getEntityItem().getItem() == InfiniteInvo.locked)
-			{
-				itemDrop.setDead();
-				event.setCanceled(true);
-				return;
-			}
-		}*/
-	}
-	/*
-	@SubscribeEvent
-	public void onItemPickup(ItemPickupEvent event)
-	{
-		if(event.pickedUp != null && event.pickedUp.getEntityItem() != null && event.pickedUp.getEntityItem().getItem() == Items.bone && !event.pickedUp.worldObj.isRemote)
-		{
-			if(!event.player.getCommandSenderName().equals(event.pickedUp.func_145800_j()));
-			{
-				if(event.pickedUp.func_145800_j() == null || event.pickedUp.func_145800_j().isEmpty())
-				{
-					return;
-				}
-			
-				EntityPlayer player = event.pickedUp.worldObj.getPlayerEntityByName(event.pickedUp.func_145800_j());
-				
-				if(player != null)
-				{
-					player.addStat(InvoAchievements.boneSanta, 1);
-				}
-			}
+			}*/
 		}
-	}*/
+	}
 	
 	@SubscribeEvent
 	public void onEntityLiving(LivingUpdateEvent event)
@@ -133,31 +103,14 @@ public class EventHandler
 				
 				if(player.inventory instanceof BigInventoryPlayer && (i >= ((BigInventoryPlayer)player.inventory).getUnlockedSlots() || i - 9 >= ModSettings.invoSize) && !event.entityLiving.worldObj.isRemote && !player.capabilities.isCreativeMode)
 				{
-					/*
-					if(stack != null && stack.getItem() != InfiniteInvo.locked)
-					{
-						player.entityDropItem(stack.copy(), 0);
-						player.inventory.setInventorySlotContents(i, null);
-						player.inventory.markDirty();
-						stack = null;
-					}					
-					if(stack == null)
-					{
-						player.inventory.setInventorySlotContents(i, new ItemStack(InfiniteInvo.locked));
-						player.inventory.markDirty();
-					}
-				*/
+					
 					continue;
 				}
 			}
 			
 			if(!event.entityLiving.isEntityAlive())
 			{
-				/*if(!II_Settings.keepUnlocks && !event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
-				{
-					unlockCache.remove(event.entityLiving.getCommandSenderName());
-					unlockCache.remove(event.entityLiving.getUniqueID().toString());
-				}*/
+
 			}
 		}
 	}
@@ -167,12 +120,7 @@ public class EventHandler
 	{
 		if(event.entityLiving instanceof EntityPlayer)
 		{
-			/*if(!II_Settings.keepUnlocks && !event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
-			{
-				unlockCache.remove(event.entityLiving.getCommandSenderName());
-				unlockCache.remove(event.entityLiving.getUniqueID().toString());
-			}*/
-			
+	
 			if(!event.entityLiving.worldObj.isRemote && event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
 			{
 				InventoryPersistProperty.keepInvoCache.put(event.entityLiving.getUniqueID(), ((EntityPlayer)event.entityLiving).inventory.writeToNBT(new NBTTagList()));
@@ -321,8 +269,8 @@ public class EventHandler
 	{
 		if(event.modID.equals(InfiniteInvo.MODID))
 		{
-			ConfigHandler.config.save();
-			ConfigHandler.initConfigs();
+			InfiniteInvo.config.save();
+			//ConfigHandler.initConfigs();
 		}
 	}
 }

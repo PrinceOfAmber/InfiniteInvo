@@ -1,10 +1,10 @@
 package infiniteinvo.core;
 
-import infiniteinvo.core.proxies.CommonProxy;
-import infiniteinvo.handlers.ConfigHandler; 
+import infiniteinvo.core.proxies.CommonProxy; 
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraftforge.fml.common.Mod;
@@ -39,7 +39,7 @@ public class InfiniteInvo
 	public static CommonProxy proxy;
 	public SimpleNetworkWrapper network ;
 	public static Logger logger;
-
+	public static Configuration config;
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -47,8 +47,21 @@ public class InfiniteInvo
     	logger = event.getModLog();
     	network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
     	
-    	ConfigHandler.config = new Configuration(event.getSuggestedConfigurationFile(), true);
-    	ConfigHandler.initConfigs();
+    	config = new Configuration(event.getSuggestedConfigurationFile(), true);
+    	config.load();
+    	 
+		ModSettings.MORE_ROWS = config.getInt("Extra Rows", Configuration.CATEGORY_GENERAL, 8, 0, 20, "How many extra rows are displayed in the inventory screen");
+		ModSettings.MORE_COLS = config.getInt("Extra Columns", Configuration.CATEGORY_GENERAL, 20, 0, 10, "How many extra columns are displayed in the inventory screen");
+		
+		
+		int fullCols = 9 + ModSettings.MORE_COLS;
+		int fullRows = 3 + ModSettings.MORE_ROWS;
+		ModSettings.invoSize  = fullCols*fullRows;
+	 
+		config.save();
+		
+	//	ModSettings.SaveToCache();
+		
     	
     	proxy.registerHandlers();
     }
