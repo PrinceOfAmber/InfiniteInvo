@@ -178,7 +178,7 @@ public class BigContainerPlayer extends ContainerPlayer
 		result.xDisplayPosition = 144 +shiftxOut-5;
 		result.yDisplayPosition = 53 +shiftyOut-19; //TODO: fix these numbers
 		int samup = 23;
-		int samleft = 8;
+		int samleft = 7;
 		for( i = 0; i < 4; i++)
 		{
 			Slot hs = crafting[i];
@@ -219,7 +219,7 @@ public class BigContainerPlayer extends ContainerPlayer
 	    		cy = holdY[h]-samup;
 	    		Slot ns = new Slot(this.craftMatrix, slotNumber, cx , cy );
 	        	this.addSlotToContainer(ns);
-	          	System.out.println("("+slotNumber+","+cx+","+cy+" -from hold);");
+	          	//System.out.println("("+slotNumber+","+cx+","+cy+" -from hold);");
 	        	crafting[3+h] = ns;
 	        }
         }
