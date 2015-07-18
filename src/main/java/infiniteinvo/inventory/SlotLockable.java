@@ -11,18 +11,18 @@ import net.minecraft.item.ItemStack;
 public class SlotLockable extends Slot
 {
 	public int slotIndex;
-	ItemStack lockedStack;
+	//ItemStack lockedStack;
 	public SlotLockable(IInventory invo, int index, int dispX, int dispY)
 	{
 		super(invo, index, dispX, dispY);
 		slotIndex = index;
-		lockedStack = new ItemStack(InfiniteInvo.locked);
+		//lockedStack = new ItemStack(InfiniteInvo.locked);
 	}
 	
 	@Override
 	public void onPickupFromSlot(EntityPlayer player, ItemStack stack)
     {
-		if(stack != null && stack.getItem() == InfiniteInvo.locked)
+		if(stack != null /*&& stack.getItem() == InfiniteInvo.locked*/)
 		{
 			stack = null;
 		}
@@ -41,7 +41,7 @@ public class SlotLockable extends Slot
             return this.inventory.getStackInSlot(this.slotIndex);
     	} else
     	{
-    		return lockedStack.copy();
+    		return null;//lockedStack.copy();
     	}
     }
 	
@@ -109,7 +109,7 @@ public class SlotLockable extends Slot
 	@Override
     public boolean getHasStack()
     {
-        return this.getStack() != null && (this.getStack().getItem() != InfiniteInvo.locked || !II_Settings.IT_Patch);
+        return this.getStack() != null /*&& (this.getStack().getItem() != InfiniteInvo.locked )*/;//|| !II_Settings.IT_Patch
     }
 	
 	public boolean isUnlocked(BigInventoryPlayer invo)

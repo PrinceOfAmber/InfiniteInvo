@@ -19,20 +19,20 @@ public class ConfigHandler
 		
 		config.load();
 		
-		II_Settings.invoSize = config.getInt("Max Invo Size", Configuration.CATEGORY_GENERAL, 54, 0, Integer.MAX_VALUE - 100, "Maximum size of the player's inventory (not including hotbar). MUST BE IDENTICAL TO SERVERSIDE!");
-		II_Settings.xpUnlock = config.getBoolean("Pay to Unlock", Configuration.CATEGORY_GENERAL, false, "Whether or not players will need to spend XP levels to unlock additional slots");
-		II_Settings.unlockedSlots = config.getInt("No. Start Unlocked", Configuration.CATEGORY_GENERAL, 0, 0, Integer.MAX_VALUE - 100, "How many slots are initially unlocked (Recommend to keep at least 27 slots for)");
-		II_Settings.unlockCost = config.getInt("Unlock cost", Configuration.CATEGORY_GENERAL, 10, 1, Integer.MAX_VALUE, "How many XP levels are required to unlock a slot");
-		II_Settings.keepUnlocks = config.getBoolean("Persistent Unlocks", Configuration.CATEGORY_GENERAL, false, "Whether players will keep their unlocked slots upon death");
-		II_Settings.unlockIncrease = config.getInt("Cost Increase", Configuration.CATEGORY_GENERAL, 2, 0, Integer.MAX_VALUE, "How much the unlock cost while increase per slot");
-		II_Settings.useOrbs = config.getBoolean("Use Orbs", Configuration.CATEGORY_GENERAL, false, "Unlock cost is in orbs instead of levels");
+		II_Settings.invoSize = 9 * config.getInt("inventory_rows", Configuration.CATEGORY_GENERAL, 7, 0, Integer.MAX_VALUE - 100, "Maximum size of the player's inventory rows (not including hotbar). MUST BE IDENTICAL TO SERVERSIDE!");
+		//II_Settings.xpUnlock = config.getBoolean("Pay to Unlock", Configuration.CATEGORY_GENERAL, false, "Whether or not players will need to spend XP levels to unlock additional slots");
+	//	II_Settings.unlockedSlots = II_Settings.invoSize;//config.getInt("No. Start Unlocked", Configuration.CATEGORY_GENERAL, 0, 0, Integer.MAX_VALUE - 100, "How many slots are initially unlocked (Recommend to keep at least 27 slots for)");
+	//	II_Settings.unlockCost = config.getInt("Unlock cost", Configuration.CATEGORY_GENERAL, 10, 1, Integer.MAX_VALUE, "How many XP levels are required to unlock a slot");
+		//II_Settings.keepUnlocks = true;//config.getBoolean("Persistent Unlocks", Configuration.CATEGORY_GENERAL, false, "Whether players will keep their unlocked slots upon death");
+	//	II_Settings.unlockIncrease = config.getInt("Cost Increase", Configuration.CATEGORY_GENERAL, 2, 0, Integer.MAX_VALUE, "How much the unlock cost while increase per slot");
+		//II_Settings.useOrbs = config.getBoolean("Use Orbs", Configuration.CATEGORY_GENERAL, false, "Unlock cost is in orbs instead of levels");
 		
-		II_Settings.extraRows = config.getInt("Extra Rows", Configuration.CATEGORY_GENERAL, 3, 0, Integer.MAX_VALUE, "How many extra rows are displayed in the inventory screen");
-		II_Settings.extraColumns = config.getInt("Extra Columns", Configuration.CATEGORY_GENERAL, 3, 0, Integer.MAX_VALUE, "How many extra columns are displayed in the inventory screen");
+		II_Settings.extraRows = config.getInt("Extra Rows", Configuration.CATEGORY_GENERAL, 4, 0, Integer.MAX_VALUE, "How many extra rows are displayed in the inventory screen");
+		II_Settings.extraColumns = config.getInt("Extra Columns", Configuration.CATEGORY_GENERAL, 0, 0, Integer.MAX_VALUE, "How many extra columns are displayed in the inventory screen");
 		
-		II_Settings.IT_Patch = config.getBoolean("ITweaks Patch", Configuration.CATEGORY_GENERAL, false, "A patch for Inventory Tweaks Shift + Space crash. Has some side effects!");
+	//	II_Settings.IT_Patch = config.getBoolean("ITweaks Patch", Configuration.CATEGORY_GENERAL, false, "A patch for Inventory Tweaks Shift + Space crash. Has some side effects!");
 		
-		II_Settings.hideUpdates = config.getBoolean("Hide Updates", Configuration.CATEGORY_GENERAL, false, "Hides the one-time update notifications");
+		//II_Settings.hideUpdates = config.getBoolean("Hide Updates", Configuration.CATEGORY_GENERAL, false, "Hides the one-time update notifications");
 		
 		config.save();
 		

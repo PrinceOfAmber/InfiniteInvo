@@ -1,6 +1,5 @@
 package infiniteinvo.network;
 
-import infiniteinvo.achievements.InvoAchievements;
 import infiniteinvo.core.II_Settings;
 import infiniteinvo.core.InfiniteInvo;
 import infiniteinvo.core.XPHelper;
@@ -71,33 +70,34 @@ public class InvoPacket implements IMessage
 					}
 
 					int unlocked = player.getEntityData().getInteger("INFINITE_INVO_UNLOCKED");
-					int cost = II_Settings.unlockCost + (unlocked * II_Settings.unlockIncrease);
+				//	int cost = II_Settings.unlockCost + (unlocked * II_Settings.unlockIncrease);
 					int totalXP = XPHelper.getPlayerXP(player);
 					
-					if(totalXP >= (II_Settings.useOrbs? cost : XPHelper.getLevelXP(cost)))
+					if(totalXP >= -99)
 					{
+						/*
 						if(II_Settings.useOrbs)
 						{
 							XPHelper.AddXP(player, -cost);
 						} else
 						{
 							XPHelper.AddXP(player, -XPHelper.getLevelXP(cost));
-						}
+						}*/
 						
 						unlocked++;
 						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", unlocked);
 						
 						EventHandler.unlockCache.put(player.getCommandSenderName(), unlocked);
 						
-						if(unlocked > 0 || !II_Settings.xpUnlock)
+						/*if(unlocked > 0 || !II_Settings.xpUnlock)
 						{
 							player.addStat(InvoAchievements.unlockFirst, 1);
-						}
+						}*/
 						
-						if(unlocked + II_Settings.unlockedSlots == II_Settings.invoSize || !II_Settings.xpUnlock)
+						/*if(unlocked + II_Settings.unlockedSlots == II_Settings.invoSize || !II_Settings.xpUnlock)
 						{
 							player.addStat(InvoAchievements.unlockAll, 1);
-						}
+						}*/
 						
 						NBTTagCompound replyTags = new NBTTagCompound();
 						replyTags.setInteger("ID", 0);
@@ -141,7 +141,7 @@ public class InvoPacket implements IMessage
 						EventHandler.unlockCache.put(player.getUniqueID().toString(), unlocked);
 					}
 					
-					if(unlocked > 0 || !II_Settings.xpUnlock)
+					/*if(unlocked > 0 || !II_Settings.xpUnlock)
 					{
 						player.addStat(InvoAchievements.unlockFirst, 1);
 					}
@@ -149,7 +149,7 @@ public class InvoPacket implements IMessage
 					if(unlocked + II_Settings.unlockedSlots >= II_Settings.invoSize || !II_Settings.xpUnlock)
 					{
 						player.addStat(InvoAchievements.unlockAll, 1);
-					}
+					}*/
 					
 					NBTTagCompound reply = new NBTTagCompound();
 					reply.setInteger("ID", 0);

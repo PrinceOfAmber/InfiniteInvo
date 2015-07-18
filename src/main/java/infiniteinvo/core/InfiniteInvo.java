@@ -1,9 +1,7 @@
 package infiniteinvo.core;
 
-import infiniteinvo.achievements.InvoAchievements;
 import infiniteinvo.core.proxies.CommonProxy;
-import infiniteinvo.handlers.ConfigHandler;
-import infiniteinvo.item.ItemLockedSlot;
+import infiniteinvo.handlers.ConfigHandler; 
 import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
@@ -18,50 +16,33 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = InfiniteInvo.MODID, version = InfiniteInvo.VERSION, name = InfiniteInvo.NAME, guiFactory = "infiniteinvo.handlers.ConfigGuiFactory")
+@Mod(modid = InfiniteInvo.MODID, useMetadata=true/*, version = InfiniteInvo.VERSION, name = InfiniteInvo.NAME, guiFactory = "infiniteinvo.handlers.ConfigGuiFactory"*/)
 public class InfiniteInvo
 {
-    public static final String MODID = "infiniteinvo";
-    public static final String VERSION = "II_VER_KEY";
+    public static final String MODID = "infiniteinvomutated";
     public static final String NAME = "InfiniteInvo";
-    public static final String PROXY = "infiniteinvo.core.proxies";
-    public static final String CHANNEL = "I_INVO_CHAN";
+    
+    //My fork of this mod was created on July 17, 2015 at https://github.com/PrinceOfAmber/InfiniteInvo
+    //original mod source was https://github.com/Funwayguy/InfiniteInvo
 	
 	@Instance(MODID)
 	public static InfiniteInvo instance;
 	
-	@SidedProxy(clientSide = PROXY + ".ClientProxy", serverSide = PROXY + ".CommonProxy")
+	@SidedProxy(clientSide = "infiniteinvo.core.proxies.ClientProxy", serverSide = "infiniteinvo.core.proxies.CommonProxy")
 	public static CommonProxy proxy;
 	public SimpleNetworkWrapper network ;
 	public static Logger logger;
-	
-	/**
-	 * Purely used for returning faking filled slots
-	 */
-	public static Item locked;
+
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
     	logger = event.getModLog();
-    	network = NetworkRegistry.INSTANCE.newSimpleChannel(CHANNEL);
+    	network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+    	
     	ConfigHandler.config = new Configuration(event.getSuggestedConfigurationFile(), true);
     	ConfigHandler.initConfigs();
     	
     	proxy.registerHandlers();
-    	
-    	InvoAchievements.InitAchievements();
-    }
-    
-    @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-    	locked = new ItemLockedSlot();
-    	GameRegistry.registerItem(locked, "locked_slot");
-    }
-    
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
     }
 }

@@ -38,7 +38,7 @@ public class GuiBigInventory extends GuiInventory
 			}
 		}
 	}
-	
+	/*
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui()
@@ -51,7 +51,7 @@ public class GuiBigInventory extends GuiInventory
 			this.buttonList.add(unlock);
 		}
 	}
-	
+	*/
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_)
 	{

@@ -1,8 +1,6 @@
 package infiniteinvo.handlers;
 
-import infiniteinvo.achievements.InvoAchievements;
-import infiniteinvo.client.inventory.GuiBigInventory;
-import infiniteinvo.client.inventory.GuiButtonUnlockSlot;
+import infiniteinvo.client.inventory.GuiBigInventory; 
 import infiniteinvo.client.inventory.InvoScrollBar;
 import infiniteinvo.core.II_Settings;
 import infiniteinvo.core.InfiniteInvo;
@@ -87,7 +85,7 @@ public class EventHandler
 			{
 				II_Settings.LoadFromCache();
 			}
-		} else if(event.entity instanceof EntityItem)
+		}/* else if(event.entity instanceof EntityItem)
 		{
 			EntityItem itemDrop = (EntityItem)event.entity;
 			
@@ -97,21 +95,9 @@ public class EventHandler
 				event.setCanceled(true);
 				return;
 			}
-		}
+		}*/
 	}
-	
-	@SubscribeEvent
-	public void onItemDropped(ItemTossEvent event)
-	{
-		if(event.entityItem.getEntityItem() != null)
-		{
-			if(Item.itemRegistry.getNameForObject(event.entityItem.getEntityItem().getItem()).equals("exnihilo:silkworm"))
-			{
-				event.player.addStat(InvoAchievements.wormDrops, 1);
-			}
-		}
-	}
-	
+	/*
 	@SubscribeEvent
 	public void onItemPickup(ItemPickupEvent event)
 	{
@@ -123,7 +109,7 @@ public class EventHandler
 				{
 					return;
 				}
-				
+			
 				EntityPlayer player = event.pickedUp.worldObj.getPlayerEntityByName(event.pickedUp.func_145800_j());
 				
 				if(player != null)
@@ -132,7 +118,7 @@ public class EventHandler
 				}
 			}
 		}
-	}
+	}*/
 	
 	@SubscribeEvent
 	public void onEntityLiving(LivingUpdateEvent event)
@@ -141,51 +127,37 @@ public class EventHandler
 		{
 			EntityPlayer player = (EntityPlayer)event.entityLiving;
 			
-			boolean flag = true;
 			for(int i = 9; i < player.inventory.mainInventory.length; i++)
 			{
 				ItemStack stack = player.inventory.mainInventory[i];
 				
 				if(player.inventory instanceof BigInventoryPlayer && (i >= ((BigInventoryPlayer)player.inventory).getUnlockedSlots() || i - 9 >= II_Settings.invoSize) && !event.entityLiving.worldObj.isRemote && !player.capabilities.isCreativeMode)
 				{
+					/*
 					if(stack != null && stack.getItem() != InfiniteInvo.locked)
 					{
 						player.entityDropItem(stack.copy(), 0);
 						player.inventory.setInventorySlotContents(i, null);
 						player.inventory.markDirty();
 						stack = null;
-					}
-					
+					}					
 					if(stack == null)
 					{
 						player.inventory.setInventorySlotContents(i, new ItemStack(InfiniteInvo.locked));
 						player.inventory.markDirty();
 					}
-					flag = false;
+				*/
 					continue;
-				}
-				
-				if(stack != null && stack.getItem() == Items.cooked_porkchop && stack.stackSize >= stack.getMaxStackSize())
-				{
-					continue;
-				} else
-				{
-					flag = false;
 				}
 			}
 			
 			if(!event.entityLiving.isEntityAlive())
 			{
-				if(!II_Settings.keepUnlocks && !event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
+				/*if(!II_Settings.keepUnlocks && !event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
 				{
 					unlockCache.remove(event.entityLiving.getCommandSenderName());
 					unlockCache.remove(event.entityLiving.getUniqueID().toString());
-				}
-			}
-			
-			if(flag)
-			{
-				player.addStat(InvoAchievements.bacon, 1);
+				}*/
 			}
 		}
 	}
@@ -195,11 +167,11 @@ public class EventHandler
 	{
 		if(event.entityLiving instanceof EntityPlayer)
 		{
-			if(!II_Settings.keepUnlocks && !event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
+			/*if(!II_Settings.keepUnlocks && !event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
 			{
 				unlockCache.remove(event.entityLiving.getCommandSenderName());
 				unlockCache.remove(event.entityLiving.getUniqueID().toString());
-			}
+			}*/
 			
 			if(!event.entityLiving.worldObj.isRemote && event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
 			{
@@ -243,7 +215,7 @@ public class EventHandler
 				final ScaledResolution scaledresolution = new ScaledResolution(event.gui.mc, event.gui.mc.displayWidth, event.gui.mc.displayHeight);
                 int i = scaledresolution.getScaledWidth();
                 int j = scaledresolution.getScaledHeight();
-				event.buttonList.add(new GuiButtonUnlockSlot(event.buttonList.size(), i/2 - 50, j - 40, 100, 20, event.gui.mc.thePlayer));
+			//	event.buttonList.add(new GuiButtonUnlockSlot(event.buttonList.size(), i/2 - 50, j - 40, 100, 20, event.gui.mc.thePlayer));
 			}
 		}
 	}

@@ -1,8 +1,7 @@
 package infiniteinvo.core.proxies;
 
 import infiniteinvo.core.InfiniteInvo;
-import infiniteinvo.handlers.EventHandler;
-import infiniteinvo.handlers.II_UpdateNotification;
+import infiniteinvo.handlers.EventHandler; 
 import infiniteinvo.network.InvoPacket;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -20,7 +19,7 @@ public class CommonProxy
 		EventHandler handler = new EventHandler();
 		MinecraftForge.EVENT_BUS.register(handler);
 		FMLCommonHandler.instance().bus().register(handler);
-		FMLCommonHandler.instance().bus().register(new II_UpdateNotification());
+	//	FMLCommonHandler.instance().bus().register(new II_UpdateNotification());
     	InfiniteInvo.instance.network.registerMessage(InvoPacket.HandleServer.class, InvoPacket.class, 0, Side.SERVER);
 	}
 }
