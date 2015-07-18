@@ -2,7 +2,7 @@ package infiniteinvo.inventory;
 
 import infiniteinvo.client.inventory.GuiBigInventory;
 import infiniteinvo.core.ModSettings;
-import infiniteinvo.core.InfiniteInvo;
+import infiniteinvo.core.ModMutatedInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.IInventory;
@@ -234,7 +234,7 @@ public class BigContainerPlayer extends ContainerPlayer
 		{
 			Exception e = new NullPointerException();
 			 
-			InfiniteInvo.logger.log(Level.FATAL, e.getStackTrace()[1].getClassName() + "." + e.getStackTrace()[1].getMethodName() + ":" + e.getStackTrace()[1].getLineNumber() + " is requesting slot " + id + " from inventory " + invo.getName() + " (" + invo.getClass().getName() + ") and got NULL!", e);
+			ModMutatedInventory.logger.log(Level.FATAL, e.getStackTrace()[1].getClassName() + "." + e.getStackTrace()[1].getMethodName() + ":" + e.getStackTrace()[1].getLineNumber() + " is requesting slot " + id + " from inventory " + invo.getName() + " (" + invo.getClass().getName() + ") and got NULL!", e);
 		}
 		return slot;
 	}

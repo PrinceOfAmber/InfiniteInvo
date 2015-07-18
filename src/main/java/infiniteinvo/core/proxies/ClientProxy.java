@@ -1,6 +1,6 @@
 package infiniteinvo.core.proxies;
 
-import infiniteinvo.core.InfiniteInvo;
+import infiniteinvo.core.ModMutatedInventory;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy
@@ -16,6 +16,6 @@ public class ClientProxy extends CommonProxy
 	{
 		super.registerHandlers();
     	
-    	InfiniteInvo.instance.network.registerMessage(InvoPacket.HandleClient.class, InvoPacket.class, 0, Side.CLIENT);
+    	ModMutatedInventory.instance.network.registerMessage(InvoPacket.HandleClient.class, InvoPacket.class, InvoPacket.ID, Side.CLIENT);
 	}
 }

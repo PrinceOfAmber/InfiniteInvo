@@ -67,10 +67,10 @@ public class EventHandler
 			if(event.world.isRemote)
 			{
 				NBTTagCompound requestTags = new NBTTagCompound();
-				requestTags.setInteger(InfiniteInvo.NBT_ID, 1);
-				requestTags.setInteger(InfiniteInvo.NBT_WORLD, event.world.provider.getDimensionId());
-				requestTags.setString(InfiniteInvo.NBT_PLAYER, player.getName());
-				InfiniteInvo.instance.network.sendToServer(new InvoPacket(requestTags));
+				requestTags.setInteger(ModMutatedInventory.NBT_ID, 1);
+				requestTags.setInteger(ModMutatedInventory.NBT_WORLD, event.world.provider.getDimensionId());
+				requestTags.setString(ModMutatedInventory.NBT_PLAYER, player.getName());
+				ModMutatedInventory.instance.network.sendToServer(new InvoPacket(requestTags));
 			} else
 			{
 				ModSettings.LoadFromCache();
@@ -132,7 +132,7 @@ public class EventHandler
 		{
 			MinecraftServer server = MinecraftServer.getServer();
 			
-			if(InfiniteInvo.proxy.isClient())
+			if(ModMutatedInventory.proxy.isClient())
 			{
 				worldDir = server.getFile("saves/" + server.getFolderName());
 			} else
@@ -187,7 +187,7 @@ public class EventHandler
 			fos.close();
 		} catch(Exception e)
 		{
-			InfiniteInvo.logger.log(Level.ERROR, "Failed to save slot unlock cache", e);
+			ModMutatedInventory.logger.log(Level.ERROR, "Failed to save slot unlock cache", e);
 		}
 	}
 	
@@ -217,16 +217,16 @@ public class EventHandler
 			fis.close();
 		} catch(Exception e)
 		{
-			InfiniteInvo.logger.log(Level.ERROR, "Failed to load slot unlock cache", e);
+			ModMutatedInventory.logger.log(Level.ERROR, "Failed to load slot unlock cache", e);
 		}
 	}
 	
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
-		if(event.modID.equals(InfiniteInvo.MODID))
+		if(event.modID.equals(ModMutatedInventory.MODID))
 		{
-			InfiniteInvo.config.save();
+			ModMutatedInventory.config.save();
 			//ConfigHandler.initConfigs();
 		}
 	}

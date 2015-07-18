@@ -1,5 +1,6 @@
 package infiniteinvo.core;
 
+import infiniteinvo.core.proxies.ButtonPacket;
 import infiniteinvo.core.proxies.CommonProxy; 
 import net.minecraftforge.common.config.Configuration;
 
@@ -12,12 +13,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = InfiniteInvo.MODID, useMetadata=true/*, version = InfiniteInvo.VERSION, name = InfiniteInvo.NAME, guiFactory = "infiniteinvo.handlers.ConfigGuiFactory"*/)
-public class InfiniteInvo
+@Mod(modid = ModMutatedInventory.MODID, useMetadata=true)
+public class ModMutatedInventory
 {
     public static final String MODID = "infiniteinvomutated";
-    public static final String NAME = "InfiniteInvo";
 	public static final String NBT_PLAYER = "Player";
 	public static final String NBT_WORLD = "World";
 	public static final String NBT_ID = "ID";
@@ -28,7 +29,7 @@ public class InfiniteInvo
     //original mod source was https://github.com/Funwayguy/InfiniteInvo
 	
 	@Instance(MODID)
-	public static InfiniteInvo instance;
+	public static ModMutatedInventory instance;
 	
 	@SidedProxy(clientSide = "infiniteinvo.core.proxies.ClientProxy", serverSide = "infiniteinvo.core.proxies.CommonProxy")
 	public static CommonProxy proxy;
@@ -40,6 +41,7 @@ public class InfiniteInvo
     {
     	logger = event.getModLog();
     	network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+    	network.registerMessage(ButtonPacket.class, ButtonPacket.class, ButtonPacket.ID, Side.SERVER);
     	
     	config = new Configuration(event.getSuggestedConfigurationFile(), true);
     	config.load();

@@ -2,7 +2,7 @@ package infiniteinvo.core.proxies;
 
 import infiniteinvo.core.EventHandler;
 import infiniteinvo.core.ModSettings;
-import infiniteinvo.core.InfiniteInvo;
+import infiniteinvo.core.ModMutatedInventory;
 import infiniteinvo.inventory.BigInventoryPlayer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class InvoPacket implements IMessage
 {
+	public static final int ID = 0;
 	NBTTagCompound tags = new NBTTagCompound();
 	
 	public InvoPacket()
@@ -95,7 +96,7 @@ public class InvoPacket implements IMessage
 					
 					if(world == null)
 					{
-						InfiniteInvo.logger.log(Level.WARN, "Unlock Sync Failed! Unabled to locate dimension " + message.tags.getInteger("World"));
+						ModMutatedInventory.logger.log(Level.WARN, "Unlock Sync Failed! Unabled to locate dimension " + message.tags.getInteger("World"));
 						return null;
 					}
 					
@@ -103,7 +104,7 @@ public class InvoPacket implements IMessage
 					
 					if(player == null || player.getEntityData() == null)
 					{
-						InfiniteInvo.logger.log(Level.WARN, "Unlock Sync Failed! Unabled to get data for player '" + message.tags.getString("Player") + "'");
+						ModMutatedInventory.logger.log(Level.WARN, "Unlock Sync Failed! Unabled to get data for player '" + message.tags.getString("Player") + "'");
 						return null;
 					}
 					
@@ -140,7 +141,7 @@ public class InvoPacket implements IMessage
 					
 					if(world == null)
 					{
-						InfiniteInvo.logger.log(Level.ERROR, "Inventory Sync Failed! Unabled to locate dimension " + message.tags.getInteger("World"));
+						ModMutatedInventory.logger.log(Level.ERROR, "Inventory Sync Failed! Unabled to locate dimension " + message.tags.getInteger("World"));
 						return null;
 					}
 					
@@ -152,7 +153,7 @@ public class InvoPacket implements IMessage
 					
 					if(player == null || player.getEntityData() == null)
 					{
-						InfiniteInvo.logger.log(Level.ERROR, "Inventory Sync Failed! Unabled to get data for player '" + message.tags.getString("Player") + "'");
+						ModMutatedInventory.logger.log(Level.ERROR, "Inventory Sync Failed! Unabled to get data for player '" + message.tags.getString("Player") + "'");
 						return null;
 					}
 					
@@ -160,17 +161,17 @@ public class InvoPacket implements IMessage
 					
 					if(container == null)
 					{
-						InfiniteInvo.logger.log(Level.ERROR, "Inventory Sync Failed! No container open on server!");
+						ModMutatedInventory.logger.log(Level.ERROR, "Inventory Sync Failed! No container open on server!");
 						return null;
 					} else if(container.windowId != conID)
 					{
-						InfiniteInvo.logger.log(Level.ERROR, "Inventory Sync Failed! Container ID mismatch (Client: " + conID + ", Server: " + container.windowId + ")");
+						ModMutatedInventory.logger.log(Level.ERROR, "Inventory Sync Failed! Container ID mismatch (Client: " + conID + ", Server: " + container.windowId + ")");
 						return null;
 					}
 					
 					if(container.inventorySlots.size() < numbers.length)
 					{
-						InfiniteInvo.logger.log(Level.ERROR, "Inventory Sync Failed! Only found " + container.inventorySlots.size() + " / " + numbers.length + " requested slots");
+						ModMutatedInventory.logger.log(Level.ERROR, "Inventory Sync Failed! Only found " + container.inventorySlots.size() + " / " + numbers.length + " requested slots");
 						return null;
 					}
 					
@@ -213,7 +214,7 @@ public class InvoPacket implements IMessage
 							if(flag && container.getSlotFromInventory(player.inventory, player.inventory.currentItem) == null)
 							{
 								flag = false;
-								InfiniteInvo.logger.log(Level.WARN, "Slot broke at index " + s.getSlotIndex() + "(Scroll: " + scrollPos + ", Pass: " + i + "/" + numbers.length + ")");
+								ModMutatedInventory.logger.log(Level.WARN, "Slot broke at index " + s.getSlotIndex() + "(Scroll: " + scrollPos + ", Pass: " + i + "/" + numbers.length + ")");
 							}
 						}
 					}
@@ -231,28 +232,28 @@ public class InvoPacket implements IMessage
 		@Override
 		public IMessage onMessage(InvoPacket message, MessageContext ctx)
 		{
-			if(message.tags.hasKey(InfiniteInvo.NBT_ID))
+			if(message.tags.hasKey(ModMutatedInventory.NBT_ID))
 			{
-				if(message.tags.getInteger(InfiniteInvo.NBT_ID) == 0)
+				if(message.tags.getInteger(ModMutatedInventory.NBT_ID) == 0)
 				{
 					EntityPlayer player = Minecraft.getMinecraft().thePlayer;
 					
-					if(!message.tags.hasKey(InfiniteInvo.NBT_PLAYER) || !message.tags.getString(InfiniteInvo.NBT_PLAYER).equals(player.getName()))
+					if(!message.tags.hasKey(ModMutatedInventory.NBT_PLAYER) || !message.tags.getString(ModMutatedInventory.NBT_PLAYER).equals(player.getName()))
 					{
-						InfiniteInvo.logger.log(Level.ERROR, "Server sent packet to the wrong player! Intended target: " + message.tags.getString(InfiniteInvo.NBT_PLAYER) + ", Recipient: " + player.getName());
+						ModMutatedInventory.logger.log(Level.ERROR, "Server sent packet to the wrong player! Intended target: " + message.tags.getString(ModMutatedInventory.NBT_PLAYER) + ", Recipient: " + player.getName());
 						return null;
 					}
 					
-					if(message.tags.hasKey(InfiniteInvo.NBT_Unlocked))
+					if(message.tags.hasKey(ModMutatedInventory.NBT_Unlocked))
 					{
-						InfiniteInvo.logger.log(Level.INFO, "Loading serverside unlocks...");
-						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", message.tags.getInteger(InfiniteInvo.NBT_Unlocked));
+						ModMutatedInventory.logger.log(Level.INFO, "Loading serverside unlocks...");
+						player.getEntityData().setInteger("INFINITE_INVO_UNLOCKED", message.tags.getInteger(ModMutatedInventory.NBT_Unlocked));
 					}
 					
-					if(message.tags.hasKey(InfiniteInvo.NBT_Settings))
+					if(message.tags.hasKey(ModMutatedInventory.NBT_Settings))
 					{
-						InfiniteInvo.logger.log(Level.INFO, "Loading serverside settings...");
-						ModSettings.LoadFromTags(message.tags.getCompoundTag(InfiniteInvo.NBT_Settings));
+						ModMutatedInventory.logger.log(Level.INFO, "Loading serverside settings...");
+						ModSettings.LoadFromTags(message.tags.getCompoundTag(ModMutatedInventory.NBT_Settings));
 					}
 				}
 			}

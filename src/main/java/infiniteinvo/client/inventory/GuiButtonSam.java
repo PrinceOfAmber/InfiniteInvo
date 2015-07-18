@@ -1,5 +1,7 @@
 package infiniteinvo.client.inventory;
 
+import infiniteinvo.core.ModMutatedInventory;
+import infiniteinvo.core.proxies.ButtonPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,12 +41,12 @@ public class GuiButtonSam extends GuiButton
     	if(pressed)
     	{
     		//do what the button is meant to do
-    	//	System.out.println("client side btn pressed");
+    	
     		//send packet to server from client (this) makes sense
     		NBTTagCompound tags = new NBTTagCompound();
     		tags.setInteger("world", this.player.worldObj.provider.getDimensionId());
     		tags.setString("player", this.player.getName());
-    		//ModInvCrafting.instance.network.sendToServer(new ButtonPacket(tags));
+    		ModMutatedInventory.instance.network.sendToServer(new ButtonPacket(tags));
     	}
     	
     	return pressed;
