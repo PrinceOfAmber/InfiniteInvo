@@ -1,15 +1,15 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "modid": "infiniteinvomutated",
+  "name": "InfiniteInvo Mutated",
+  "description": "InfiniteInvo MutatedNOT FOR RELEASE: just a fork of the great work by Funwayguy for me (Lothrazar) to play and experiment with these classes and functions in 1.8",
+  "version": "dev",
+  "mcversion": "1.8",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
+  "authorList": ["Funwayguy","Bacon_Donut","Lothrazar"],
+  "credits": "Thank's Siyliss siyLove",
+  "logoFile": "title.png",
   "screenshots": [],
   "dependencies": []
 }
