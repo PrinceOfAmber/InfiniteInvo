@@ -62,41 +62,45 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 			shiftLeftAll(invo);
 			break;
 		case ModMutatedInventory.SORT_RIGHTALL:
+			shiftRightAll(invo);
 			break;
 		}
-	 
-
-		/*
-		int iEmpty = -1;
-		ItemStack item = null;
-		
-		System.out.println("# columns = "+ModSettings.fullCols);
-		
-		for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
-		{
-			if((i-9) % ModSettings.fullCols == 0)
-			{
-
-				item = invo.getStackInSlot(i);
-				if(item != null)
-				{
-					System.out.println("this is end slate = "+i+"__" +item.getDisplayName());
-					
-				}
-			}
-		}*/
-		
+	  
 		return null;
 	
 	}
-	private void shiftLeftAll(InventoryPlayer invo)
+	private void shiftRightAll(InventoryPlayer invo)
 	{
-		//ArrayList<Integer> empty = new ArrayList<Integer>();
 		Queue<Integer> empty = new LinkedList<Integer>();
-		//ArrayList<Integer> nonempty = new ArrayList<Integer>();
+
 		ItemStack item;
 		
-		//int firstEmpty = -1;
+		for(int i = invo.getSizeInventory() - (armorSize + 1); i >= hotbarSize;i--)
+		{
+			item = invo.getStackInSlot(i);
+			
+			if(item == null)
+			{
+				empty.add(i);
+			}
+			else
+			{
+				//find an empty spot for it
+				if(empty.size() > 0 && empty.peek() > i)
+				{
+					//poll remove it since its not empty anymore
+					moveFromTo(invo,i,empty.poll());
+					empty.add(i);
+				}
+			}
+		}
+	}
+	private void shiftLeftAll(InventoryPlayer invo)
+	{
+		Queue<Integer> empty = new LinkedList<Integer>();
+
+		ItemStack item;
+		
 		for(int i = hotbarSize; i < invo.getSizeInventory() - armorSize;i++)
 		{
 			item = invo.getStackInSlot(i);
@@ -110,12 +114,9 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 				//find an empty spot for it
 				if(empty.size() > 0 && empty.peek() < i)
 				{
-					//System.out.println("nonempty i "+i +" and empty "+empty.peek());
-					
 					//poll remove it since its not empty anymore
 					moveFromTo(invo,i,empty.poll());
 					empty.add(i);
-					
 				}
 			}
 		}
