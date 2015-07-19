@@ -82,7 +82,7 @@ public class GuiBigInventory extends GuiInventory
 				
 			}
 			
-			x = STARTX + enderWidth + x_spacing;
+			x = STARTX + enderWidth + 5;
 			y = STARTY;
 			
 			this.buttonList.add(new GuiButtonFilter(buttonID(), x, y ,enderWidth,height));

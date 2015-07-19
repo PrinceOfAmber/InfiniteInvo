@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import infiniteinvo.core.proxies.EnderButtonPacket;
 import infiniteinvo.core.proxies.CommonProxy; 
-import infiniteinvo.core.proxies.FilterPacket;
+import infiniteinvo.core.proxies.FilterButtonPacket;
 import infiniteinvo.core.proxies.SortButtonPacket;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -57,7 +57,7 @@ public class ModMutatedInventory
     	network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
     	network.registerMessage(EnderButtonPacket.class, EnderButtonPacket.class, EnderButtonPacket.ID, Side.SERVER);
     	network.registerMessage(SortButtonPacket.class, SortButtonPacket.class, SortButtonPacket.ID, Side.SERVER);
-    	network.registerMessage(FilterPacket.class, FilterPacket.class, FilterPacket.ID, Side.SERVER);
+    	network.registerMessage(FilterButtonPacket.class, FilterButtonPacket.class, FilterButtonPacket.ID, Side.SERVER);
     	
     	config = new Configuration(event.getSuggestedConfigurationFile(), true);
     	config.load();
@@ -65,7 +65,7 @@ public class ModMutatedInventory
     	String category = Configuration.CATEGORY_GENERAL;
 		ModSettings.MORE_ROWS = config.getInt("extra_rows", category, 12, 0, 20, "How many extra rows are displayed in the inventory screen");
 		ModSettings.MORE_COLS = config.getInt("extra_columns", category, 16, 0, 20, "How many extra columns are displayed in the inventory screen");
-		
+		ModSettings.filterRange = config.getInt("button_filter_range", category, 12, 1, 32, "Range of the filter button to reach nearby chests");
 		
 		ModSettings.fullCols = 9 + ModSettings.MORE_COLS;
 		ModSettings.fullRows = 3 + ModSettings.MORE_ROWS;
@@ -76,6 +76,7 @@ public class ModMutatedInventory
 		ModSettings.showCharacter = config.getBoolean("show_character",category,true,"Show or hide the animated character text in the inventory");
 		ModSettings.showEnderButton = config.getBoolean("button_ender_chest",category,true,"Show or hide the ender chest button");
 		ModSettings.showSortButtons = config.getBoolean("button_sort",category,true,"Show or hide the ender chest button");
+		ModSettings.showFilterButton = config.getBoolean("button_filter",category,true,"Show or hide the filter button");
 		
 		config.save();
 		

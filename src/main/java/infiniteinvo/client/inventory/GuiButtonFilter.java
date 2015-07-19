@@ -1,7 +1,7 @@
 package infiniteinvo.client.inventory;
 
 import infiniteinvo.core.ModMutatedInventory;
-import infiniteinvo.core.proxies.FilterPacket;
+import infiniteinvo.core.proxies.FilterButtonPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +33,7 @@ public class GuiButtonFilter extends GuiButton
     		//send packet to server from client (this) makes sense
     		NBTTagCompound tags = new NBTTagCompound();
 
-    		ModMutatedInventory.instance.network.sendToServer(new FilterPacket(tags));
+    		ModMutatedInventory.instance.network.sendToServer(new FilterButtonPacket(tags));
     	}
     	
     	return pressed;

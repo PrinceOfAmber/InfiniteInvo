@@ -3,6 +3,7 @@ package infiniteinvo.core.proxies;
 import java.util.ArrayList;
 
 import infiniteinvo.core.ModMutatedInventory;
+import infiniteinvo.core.ModSettings;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -14,13 +15,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class FilterPacket implements IMessage , IMessageHandler<FilterPacket, IMessage>
+public class FilterButtonPacket implements IMessage , IMessageHandler<FilterButtonPacket, IMessage>
 {
-	public FilterPacket() {}
+	public FilterButtonPacket() {}
 	NBTTagCompound tags = new NBTTagCompound();
 	public static final int ID = 3;
 	
-	public FilterPacket(NBTTagCompound ptags)
+	public FilterButtonPacket(NBTTagCompound ptags)
 	{
 		tags = ptags;
 	}
@@ -40,11 +41,11 @@ public class FilterPacket implements IMessage , IMessageHandler<FilterPacket, IM
 
 
 	@Override
-	public IMessage onMessage(FilterPacket message, MessageContext ctx)
+	public IMessage onMessage(FilterButtonPacket message, MessageContext ctx)
 	{
 		EntityPlayer p = ctx.getServerHandler().playerEntity;
 
-		ArrayList<BlockPos> b = ModMutatedInventory.findBlocks(p, Blocks.chest, 12);
+		ArrayList<BlockPos> b = ModMutatedInventory.findBlocks(p, Blocks.chest, ModSettings.filterRange);
 		
 		for(BlockPos pos : b)
 		{
