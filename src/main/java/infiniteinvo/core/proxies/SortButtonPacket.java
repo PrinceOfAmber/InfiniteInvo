@@ -75,7 +75,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 
 		ItemStack item;
 		
-		for(int i = invo.getSizeInventory() - (armorSize + 1); i >= hotbarSize;i--)
+		for(int i = invo.getSizeInventory() - (ModSettings.armorSize + 1); i >= ModSettings.hotbarSize;i--)
 		{
 			item = invo.getStackInSlot(i);
 			
@@ -101,7 +101,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 
 		ItemStack item;
 		
-		for(int i = hotbarSize; i < invo.getSizeInventory() - armorSize;i++)
+		for(int i = ModSettings.hotbarSize; i < invo.getSizeInventory() - ModSettings.armorSize;i++)
 		{
 			item = invo.getStackInSlot(i);
 			
@@ -121,8 +121,6 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 			}
 		}
 	}
-	int hotbarSize = 9;
-	int armorSize = 4;
 	/**
 	 * WARNING: it assumes that 'to' is already empty, and overwrites it.  sets 'from' to empty for you
 	 * @param invo
@@ -140,7 +138,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		ItemStack item = null;
 		//0 to 8 is crafting
 		//armor is 384-387
-		for(int i = invo.getSizeInventory() - (armorSize + 1); i >= hotbarSize;i--)//388-4 384
+		for(int i = invo.getSizeInventory() - (ModSettings.armorSize + 1); i >= ModSettings.hotbarSize;i--)//388-4 384
 		{
 			item = invo.getStackInSlot(i);
 			if(item == null)
@@ -168,7 +166,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		ItemStack item = null;
 		//0 to 8 is crafting
 		//armor is 384-387
-		for(int i = hotbarSize; i < invo.getSizeInventory() - armorSize;i++)
+		for(int i = ModSettings.hotbarSize; i < invo.getSizeInventory() - ModSettings.armorSize;i++)
 		{
 		
 			item = invo.getStackInSlot(i);

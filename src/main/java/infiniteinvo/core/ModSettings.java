@@ -8,6 +8,10 @@ import net.minecraft.nbt.NBTTagCompound;
 public class ModSettings
 {
 	public static NBTTagCompound cachedSettings = new NBTTagCompound();
+	
+
+	public final static int hotbarSize = 9;
+	public final static int armorSize = 4;
 
 	public static int invoSize;
 	public static int MORE_ROWS;

@@ -1,8 +1,14 @@
 package infiniteinvo.core.proxies;
 
+import java.util.ArrayList;
+
+import infiniteinvo.core.ModMutatedInventory;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -38,10 +44,22 @@ public class FilterPacket implements IMessage , IMessageHandler<FilterPacket, IM
 	{
 		EntityPlayer p = ctx.getServerHandler().playerEntity;
 
-		System.out.println("filter");
-		//p.displayGUIChest(p.getInventoryEnderChest());
+		ArrayList<BlockPos> b = ModMutatedInventory.findBlocks(p, Blocks.chest, 12);
+		
+		for(BlockPos pos : b)
+		{
+			if(p.worldObj.getTileEntity(pos) instanceof TileEntityChest)
+				ModMutatedInventory.sortFromPlayerToChestEntity(p.worldObj, (TileEntityChest)p.worldObj.getTileEntity(pos), p);
+			
+		}
+		
 		
 		return null;
 	
 	}
+	
+	
+	
+  	
+	
 }
