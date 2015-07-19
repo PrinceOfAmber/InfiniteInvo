@@ -82,10 +82,14 @@ public class GuiBigInventory extends GuiInventory
 				
 			}
 			
-			x = STARTX + enderWidth + 5;
-			y = STARTY;
 			
-			this.buttonList.add(new GuiButtonFilter(buttonID(), x, y ,enderWidth,height));
+			if(ModSettings.showFilterButton)
+			{
+				x = STARTX + enderWidth + 5;
+				y = STARTY;
+
+				this.buttonList.add(new GuiButtonFilter(buttonID(), x, y ,enderWidth,height));
+			}
 		}
     }
 	@Override
