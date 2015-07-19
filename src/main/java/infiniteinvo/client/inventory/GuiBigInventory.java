@@ -45,7 +45,7 @@ public class GuiBigInventory extends GuiInventory
 		if(this.container != null && this.mc.playerController.isInCreativeMode() == false)
 		{
 			int height = 20;
-			int STARTX = this.guiLeft + 280;
+			int STARTX = this.guiLeft + 240;
 			int STARTY = this.guiTop + height/2;
 			int enderWidth = 90;
 			int sortWidth = enderWidth/2 - 5;
