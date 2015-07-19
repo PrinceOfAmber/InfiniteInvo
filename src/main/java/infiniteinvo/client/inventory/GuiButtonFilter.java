@@ -1,8 +1,7 @@
 package infiniteinvo.client.inventory;
 
 import infiniteinvo.core.ModMutatedInventory;
-import infiniteinvo.core.proxies.EnderButtonPacket;
-import infiniteinvo.core.proxies.SortButtonPacket;
+import infiniteinvo.core.proxies.FilterPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,16 +10,14 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class GuiButtonSort extends GuiButton 
+public class GuiButtonFilter extends GuiButton 
 {
 	//imported from https://github.com/PrinceOfAmber/SamsPowerups , author Lothrazar aka Sam Bassett
 	//private EntityPlayer player;
-	private int sortType;
-    public GuiButtonSort(int buttonId, int x, int y, int w,int h,  int sort, String text)
+    public GuiButtonFilter(int buttonId, int x, int y, int w,int h)
     {
-    	super(buttonId, x, y, w,h, text );//StatCollector.translateToLocal(ModMutatedInventory.MODID+".sort")
+    	super(buttonId, x, y, w,h, StatCollector.translateToLocal("button.filter"));
     	//this.player = player;
-    	sortType = sort;
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,9 +32,8 @@ public class GuiButtonSort extends GuiButton
     	
     		//send packet to server from client (this) makes sense
     		NBTTagCompound tags = new NBTTagCompound();
-  
-    		tags.setInteger(SortButtonPacket.NBT_SORT, sortType);
-    		ModMutatedInventory.instance.network.sendToServer(new SortButtonPacket(tags));
+
+    		ModMutatedInventory.instance.network.sendToServer(new FilterPacket(tags));
     	}
     	
     	return pressed;

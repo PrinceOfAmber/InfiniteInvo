@@ -13,11 +13,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class GuiButtonEnderChest extends GuiButton 
 {
 	//imported from https://github.com/PrinceOfAmber/SamsPowerups , author Lothrazar aka Sam Bassett
-	private EntityPlayer player;
-    public GuiButtonEnderChest(int buttonId, int x, int y, int w,int h, EntityPlayer player)
+	//private EntityPlayer player;
+    public GuiButtonEnderChest(int buttonId, int x, int y, int w,int h)
     {
     	super(buttonId, x, y, w,h, StatCollector.translateToLocal("tile.enderChest.name"));
-    	this.player = player;
+    	//this.player = player;
     }
 
     @SideOnly(Side.CLIENT)

@@ -1,21 +1,15 @@
 package infiniteinvo.client.inventory;
 
-import java.io.IOException;
-
 import infiniteinvo.core.ModMutatedInventory;
 import infiniteinvo.core.ModSettings;
 import infiniteinvo.inventory.BigContainerPlayer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
  
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 public class GuiBigInventory extends GuiInventory
@@ -42,6 +36,7 @@ public class GuiBigInventory extends GuiInventory
 		button_id++;
 		return button_id;
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui()
     {
@@ -49,43 +44,48 @@ public class GuiBigInventory extends GuiInventory
 		
 		if(this.container != null && this.mc.playerController.isInCreativeMode() == false)
 		{
+			int height = 20;
+			int STARTX = this.guiLeft + 280;
+			int STARTY = this.guiTop + height/2;
 			int enderWidth = 90;
 			int sortWidth = enderWidth/2 - 5;
-			int height = 20;
-			int x = this.guiLeft + 280;
-			int y = this.guiTop + height/2;
+			int x = STARTX;
+			int y = STARTY;
+			int x_spacing = enderWidth/2 + 5;
 			if(ModSettings.showEnderButton)
 			{
-				GuiButton enderButton = new GuiButtonEnderChest(buttonID(), x, y ,enderWidth,height,this.mc.thePlayer);
-
-				this.buttonList.add(enderButton);
+				this.buttonList.add(new GuiButtonEnderChest(buttonID(), x, y ,enderWidth,height));
 			}
 			if(ModSettings.showSortButtons)
 			{
-				int x_spacing = enderWidth/2 + 5;
-				y += height;
+				y += height+1;
 				GuiButton sortButton;
 
-				sortButton = new GuiButtonSort(buttonID(), x, y ,sortWidth,height, this.mc.thePlayer,ModMutatedInventory.SORT_LEFT,"<");
+				sortButton = new GuiButtonSort(buttonID(), x, y ,sortWidth,height, ModMutatedInventory.SORT_LEFT,"<");
 				this.buttonList.add(sortButton);
 
 				x += x_spacing;
 
-				sortButton = new GuiButtonSort(buttonID(), x, y ,sortWidth,height, this.mc.thePlayer,ModMutatedInventory.SORT_RIGHT,">");
+				sortButton = new GuiButtonSort(buttonID(), x, y ,sortWidth,height, ModMutatedInventory.SORT_RIGHT,">");
 				this.buttonList.add(sortButton);
 				
-				x = this.guiLeft + 280;
-				y += height;
+				x = STARTX;
+				y += height+1;
 
-				sortButton = new GuiButtonSort(buttonID(), x, y ,sortWidth,height, this.mc.thePlayer,ModMutatedInventory.SORT_LEFTALL,"<<");
+				sortButton = new GuiButtonSort(buttonID(), x, y ,sortWidth,height, ModMutatedInventory.SORT_LEFTALL,"<<");
 				this.buttonList.add(sortButton);
 
 				x += x_spacing;
 				
-				sortButton = new GuiButtonSort(buttonID(), x, y ,sortWidth,height, this.mc.thePlayer,ModMutatedInventory.SORT_RIGHTALL,">>");
+				sortButton = new GuiButtonSort(buttonID(), x, y ,sortWidth,height, ModMutatedInventory.SORT_RIGHTALL,">>");
 				this.buttonList.add(sortButton);
 				
 			}
+			
+			x = STARTX + enderWidth + x_spacing;
+			y = STARTY;
+			
+			this.buttonList.add(new GuiButtonFilter(buttonID(), x, y ,enderWidth,height));
 		}
     }
 	@Override

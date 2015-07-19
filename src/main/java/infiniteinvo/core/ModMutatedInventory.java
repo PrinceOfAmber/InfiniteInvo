@@ -2,6 +2,7 @@ package infiniteinvo.core;
 
 import infiniteinvo.core.proxies.EnderButtonPacket;
 import infiniteinvo.core.proxies.CommonProxy; 
+import infiniteinvo.core.proxies.FilterPacket;
 import infiniteinvo.core.proxies.SortButtonPacket;
 import net.minecraftforge.common.config.Configuration;
 
@@ -48,6 +49,7 @@ public class ModMutatedInventory
     	network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
     	network.registerMessage(EnderButtonPacket.class, EnderButtonPacket.class, EnderButtonPacket.ID, Side.SERVER);
     	network.registerMessage(SortButtonPacket.class, SortButtonPacket.class, SortButtonPacket.ID, Side.SERVER);
+    	network.registerMessage(FilterPacket.class, FilterPacket.class, FilterPacket.ID, Side.SERVER);
     	
     	config = new Configuration(event.getSuggestedConfigurationFile(), true);
     	config.load();
