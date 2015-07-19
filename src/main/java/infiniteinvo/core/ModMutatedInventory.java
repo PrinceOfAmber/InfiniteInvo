@@ -58,6 +58,7 @@ public class ModMutatedInventory
 		//(String name, String category, String defaultValue, String comment)
 		ModSettings.showText = config.getBoolean("Show Text",category,false,"Show or hide the 'Crafting' text in the inventory");
 		ModSettings.showCharacter = config.getBoolean("Show Character",category,true,"Show or hide the animated character text in the inventory");
+		ModSettings.showEnderButton = config.getBoolean("Show Ender Chest Button",category,true,"Show or hide the ender chest button");
 		 
 		config.save();
 		
