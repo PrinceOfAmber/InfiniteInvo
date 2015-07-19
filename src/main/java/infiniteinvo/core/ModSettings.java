@@ -15,6 +15,9 @@ public class ModSettings
     public static int fullCols;// = 9 + ModSettings.MORE_COLS;
     public static int fullRows;	//3 + ModSettings.MORE_ROWS;
 
+	public static boolean showText = false;
+	public static boolean showCharacter = true;
+	
 	public static void SaveToCache()
 	{
 		cachedSettings = new NBTTagCompound();

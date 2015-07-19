@@ -46,14 +46,19 @@ public class ModMutatedInventory
     	config = new Configuration(event.getSuggestedConfigurationFile(), true);
     	config.load();
     	 
-		ModSettings.MORE_ROWS = config.getInt("Extra Rows", Configuration.CATEGORY_GENERAL, 12, 0, 20, "How many extra rows are displayed in the inventory screen");
-		ModSettings.MORE_COLS = config.getInt("Extra Columns", Configuration.CATEGORY_GENERAL, 16, 0, 20, "How many extra columns are displayed in the inventory screen");
+    	String category = Configuration.CATEGORY_GENERAL;
+		ModSettings.MORE_ROWS = config.getInt("Extra Rows", category, 12, 0, 20, "How many extra rows are displayed in the inventory screen");
+		ModSettings.MORE_COLS = config.getInt("Extra Columns", category, 16, 0, 20, "How many extra columns are displayed in the inventory screen");
 		
 		
 		ModSettings.fullCols = 9 + ModSettings.MORE_COLS;
 		ModSettings.fullRows = 3 + ModSettings.MORE_ROWS;
 		ModSettings.invoSize  = ModSettings.fullCols * ModSettings.fullRows;
-	 
+		
+		//(String name, String category, String defaultValue, String comment)
+		ModSettings.showText = config.getBoolean("Show Text",category,false,"Show or hide the 'Crafting' text in the inventory");
+		ModSettings.showCharacter = config.getBoolean("Show Character",category,true,"Show or hide the animated character text in the inventory");
+		 
 		config.save();
 		
 		ModSettings.SaveToCache();

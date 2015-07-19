@@ -2,6 +2,7 @@ package infiniteinvo.client.inventory;
 
 import java.io.IOException;
 
+import infiniteinvo.core.ModMutatedInventory;
 import infiniteinvo.core.ModSettings;
 import infiniteinvo.inventory.BigContainerPlayer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -21,8 +22,6 @@ public class GuiBigInventory extends GuiInventory
 	BigContainerPlayer container;
 
 	public boolean redoButtons = false;
-	public boolean showText = false;
-	public boolean showCharacter = true;
 	int xStart = 169;
 	int yStart = 137;
 	public static final int square = 18;
@@ -41,8 +40,16 @@ public class GuiBigInventory extends GuiInventory
 		
 		if(this.container != null && this.mc.playerController.isInCreativeMode() == false)
 		{
-			GuiButtonSam button = new GuiButtonSam(100, this.guiLeft + 280, this.guiTop + 10,90,20, StatCollector.translateToLocal("tile.enderChest.name"),this.mc.thePlayer);
-			this.buttonList.add(button);
+			int x = this.guiLeft + 280;
+			int y = this.guiTop + 10;
+			GuiButtonSam ender_chest = new GuiButtonSam(100, x, y ,90,20, StatCollector.translateToLocal("tile.enderChest.name"),this.mc.thePlayer);
+			
+			x += 90;
+			GuiButtonSam b = new GuiButtonSam(101, x, y ,90,20, StatCollector.translateToLocal(ModMutatedInventory.MODID+".sort"),this.mc.thePlayer);
+			
+			
+			this.buttonList.add(ender_chest);
+			this.buttonList.add(b);
 			
 		}
     }
@@ -96,7 +103,7 @@ public class GuiBigInventory extends GuiInventory
         
         this.drawTexturedModalRect(gLeft + xStart + (ModSettings.MORE_COLS * square), gTop + yStart + (ModSettings.MORE_ROWS * square), 187 + barW, yStart, 16 - barW, 29);
 
-        if(showCharacter)
+        if(ModSettings.showCharacter)
         	drawEntityOnScreen(gLeft + 51, gTop + 75, 30, (float)(gLeft + 51) - (float)mouseX, (float)(gTop + 75 - 50) - (float)mouseY, this.mc.thePlayer);
      
 	}
@@ -104,7 +111,7 @@ public class GuiBigInventory extends GuiInventory
 	@Override
 	public void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		if(showText)
+		if(ModSettings.showText)
 			this.fontRendererObj.drawString(I18n.format("container.crafting", new Object[0]), 87, 32, 4210752);
 		
 		if(container != null)
@@ -113,7 +120,7 @@ public class GuiBigInventory extends GuiInventory
 			this.mc.getTextureManager().bindTexture(new ResourceLocation("infiniteinvo", "textures/gui/inventory_gui_3.png"));
 			
 	        int maxPos = MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)) - (3 + ModSettings.MORE_ROWS);
-			int barPos = maxPos > 0? MathHelper.floor_float((float)container.scrollPos / (float)maxPos * (18F * (3F + (float)ModSettings.MORE_ROWS) - 8F)) : 0;
+			int barPos = maxPos > 0 ? MathHelper.floor_float((float)container.scrollPos / (float)maxPos * (18F * (3F + (float)ModSettings.MORE_ROWS) - 8F)) : 0;
 			
 			if((ModSettings.MORE_COLS + 9) * (ModSettings.MORE_ROWS + 3) < ModSettings.invoSize)
 			{
@@ -136,55 +143,4 @@ public class GuiBigInventory extends GuiInventory
 	        }
 		}
 	}
-    
-
-	/**
-	 * -1 = Dragging outside scroll, 0 = Not dragging, 1 = Dragging from scroll
-	 */
-	
-	public int dragging = 0;
-	/*
-    public void handleMouseInput() throws IOException
-    {
-    	super.handleMouseInput();
-    
-    	if(container != null)
-    	{
-        	int scrollDir = (int)Math.signum(Mouse.getDWheel());
-        	
-        	if(container.scrollPos - scrollDir < 0)
-        	{
-        		container.scrollPos = 0;
-        	} else if(scrollDir != 0)
-        	{
-        		container.scrollPos -= scrollDir;
-        	} else if(Mouse.isButtonDown(0))
-        	{
-                final ScaledResolution scaledresolution = new ScaledResolution(this.mc, this.mc.displayWidth, this.mc.displayHeight);
-                int i = scaledresolution.getScaledWidth();
-                int j = scaledresolution.getScaledHeight();
-                int mouseX = Mouse.getX() * i / this.mc.displayWidth;
-                int mouseY = height - Mouse.getY() * j / this.mc.displayHeight - 1;
-        		int sx = this.guiLeft + xStart + (ModSettings.MORE_COLS * square);
-        		int sy = this.guiTop + 83;
-        		
-        		boolean flag = mouseX >= sx && mouseY >= sy && mouseX < sx + 8 && mouseY < sy + (square * (3 + ModSettings.MORE_ROWS));
-        		
-        		if((flag || dragging == 1) && dragging != -1)
-        		{
-        			dragging = 1;
-        			int maxScroll = MathHelper.ceiling_float_int((float)ModSettings.invoSize/(float)(9 + ModSettings.MORE_COLS)) - (3 + ModSettings.MORE_ROWS);
-        			container.scrollPos = MathHelper.clamp_int(Math.round((float)(mouseY - sy) / (float)(square * (3 + ModSettings.MORE_ROWS)) * (float)maxScroll), 0, maxScroll);
-        		} else
-        		{
-        			dragging = -1;
-        		}
-        	} else
-        	{
-        		dragging = 0;
-        	}
-        	
-        	container.updateScroll();
-    	}
-    }*/
 }
