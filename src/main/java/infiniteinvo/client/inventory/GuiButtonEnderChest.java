@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -13,24 +14,11 @@ public class GuiButtonEnderChest extends GuiButton
 {
 	//imported from https://github.com/PrinceOfAmber/SamsPowerups , author Lothrazar aka Sam Bassett
 	private EntityPlayer player;
-    public GuiButtonEnderChest(int buttonId, int x, int y, int w,int h,String buttonText, EntityPlayer player)
+    public GuiButtonEnderChest(int buttonId, int x, int y, int w,int h, EntityPlayer player)
     {
-    	super(buttonId, x, y, w,h, buttonText);
+    	super(buttonId, x, y, w,h, StatCollector.translateToLocal("tile.enderChest.name"));
     	this.player = player;
     }
-    /*
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void drawButton(Minecraft mc, int mouseX, int mouseY)
-    {
-    	//we could add stuff to the button here dyanmically if we want
-    	// this.displayString += "button text";
-    	 
-    	 //
-    	 
-    	 super.drawButton(mc, mouseX, mouseY);
-    }
-    */
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -44,8 +32,8 @@ public class GuiButtonEnderChest extends GuiButton
     	
     		//send packet to server from client (this) makes sense
     		NBTTagCompound tags = new NBTTagCompound();
-    		tags.setInteger("world", this.player.worldObj.provider.getDimensionId());
-    		tags.setString("player", this.player.getName());
+    		//tags.setInteger("world", this.player.worldObj.provider.getDimensionId());
+    		//tags.setString("player", this.player.getName());
     		ModMutatedInventory.instance.network.sendToServer(new EnderButtonPacket(tags));
     	}
     	

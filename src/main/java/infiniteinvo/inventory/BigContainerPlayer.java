@@ -77,6 +77,7 @@ public class BigContainerPlayer extends ContainerPlayer
             	if(j == this.craftSize-1)onHold = true; //hold right and bottom column
             	
             	slotNumber = j + i * this.craftSize;
+                System.out.println("crafting = "+slotNumber);
             
             	cx = 88 + j * GuiBigInventory.square + shiftx;
             	cy = 26 + i * GuiBigInventory.square + shifty;
@@ -102,6 +103,7 @@ public class BigContainerPlayer extends ContainerPlayer
             final int k = i;
             slotNumber =  playerInventory.getSizeInventory() - 1 - i;
             //used to be its own class SlotArmor
+            System.out.println("armor = "+slotNumber);
             this.addSlotToContainer(new Slot(playerInventory, slotNumber, cx, cy)
             {
                 private static final String __OBFID = "CL_00001755";
@@ -134,6 +136,7 @@ public class BigContainerPlayer extends ContainerPlayer
             for (j = 0; j < 9; ++j)
             {
             	slotNumber = j + (i + 1) * 9;
+                System.out.println("plain invo = "+slotNumber);
             	cx = 8 + j * GuiBigInventory.square;
             	cy = 84 + i * GuiBigInventory.square;
                 this.addSlotToContainer(new Slot(playerInventory, slotNumber, cx, cy));
@@ -145,6 +148,7 @@ public class BigContainerPlayer extends ContainerPlayer
         	slotNumber = i;
         	cx = 8 + i * GuiBigInventory.square;
         	cy = 142;
+            System.out.println("hotbar = "+slotNumber);
             this.addSlotToContainer(new Slot(playerInventory, slotNumber, cx, cy));
         }
 
@@ -203,8 +207,12 @@ public class BigContainerPlayer extends ContainerPlayer
             	} else
             	{
             		// Moved off screen to avoid interaction until screen scrolls over the row
-            		Slot ns = new Slot(playerInventory, j + (i + 1) * 9, -999, -999);
-            		slots[j + (i * 9)] = ns;
+            		slotNumber =  j + (i + 1) * 9;
+            		cx = -999;
+            		cy = -999;
+                    System.out.println("new slots = "+slotNumber);
+            		Slot ns = new Slot(playerInventory,slotNumber, cx,cy);
+            		slots[slotNumber - 9] = ns;
             		this.addSlotToContainer(ns);
             	}
             }
@@ -219,10 +227,12 @@ public class BigContainerPlayer extends ContainerPlayer
 	    		cy = holdY[h]-samup;
 	    		Slot ns = new Slot(this.craftMatrix, slotNumber, cx , cy );
 	        	this.addSlotToContainer(ns);
-	          	//System.out.println("("+slotNumber+","+cx+","+cy+" -from hold);");
+	          	System.out.println(" -from hold"+slotNumber+","+cx+","+cy+";");
 	        	crafting[3+h] = ns;
 	        }
         }
+      	System.out.println(" FINALSIZE  "+this.invo.getSizeInventory());
+        
         this.updateScroll();
 	}
 	

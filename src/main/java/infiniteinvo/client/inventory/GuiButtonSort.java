@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -14,9 +15,9 @@ public class GuiButtonSort extends GuiButton
 {
 	//imported from https://github.com/PrinceOfAmber/SamsPowerups , author Lothrazar aka Sam Bassett
 	private EntityPlayer player;
-    public GuiButtonSort(int buttonId, int x, int y, int w,int h,String buttonText, EntityPlayer player)
+    public GuiButtonSort(int buttonId, int x, int y, int w,int h, EntityPlayer player)
     {
-    	super(buttonId, x, y, w,h, buttonText);
+    	super(buttonId, x, y, w,h, StatCollector.translateToLocal(ModMutatedInventory.MODID+".sort"));
     	this.player = player;
     }
     /*

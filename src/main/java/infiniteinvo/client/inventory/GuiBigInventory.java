@@ -5,6 +5,7 @@ import java.io.IOException;
 import infiniteinvo.core.ModMutatedInventory;
 import infiniteinvo.core.ModSettings;
 import infiniteinvo.inventory.BigContainerPlayer;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiInventory;
  
@@ -25,6 +26,8 @@ public class GuiBigInventory extends GuiInventory
 	int xStart = 169;
 	int yStart = 137;
 	public static final int square = 18;
+	private GuiButton sortButton;
+	private GuiButton enderButton;
 	public GuiBigInventory(EntityPlayer player)
 	{
 		super(player);
@@ -45,18 +48,18 @@ public class GuiBigInventory extends GuiInventory
 			
 			if(ModSettings.showEnderButton)
 			{
-				GuiButtonEnderChest ender_chest = new GuiButtonEnderChest(100, x, y ,90,20, StatCollector.translateToLocal("tile.enderChest.name"),this.mc.thePlayer);
+				enderButton = new GuiButtonEnderChest(100, x, y ,90,20,this.mc.thePlayer);
 
 				
-				this.buttonList.add(ender_chest);
+				this.buttonList.add(enderButton);
 			}
-			
-		
-			y += 40;
-			GuiButtonEnderChest b = new GuiButtonEnderChest(101, x, y ,90,20, StatCollector.translateToLocal(ModMutatedInventory.MODID+".sort"),this.mc.thePlayer);
-			
-			this.buttonList.add(b);
-			
+			if(ModSettings.showSortButton)
+			{
+				y += 40;
+				sortButton = new GuiButtonSort(101, x, y ,90,20, this.mc.thePlayer);
+				
+				this.buttonList.add(sortButton);
+			}
 		}
     }
 	@Override

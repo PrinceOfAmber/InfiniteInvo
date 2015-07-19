@@ -49,8 +49,8 @@ public class ModMutatedInventory
     	config.load();
     	 
     	String category = Configuration.CATEGORY_GENERAL;
-		ModSettings.MORE_ROWS = config.getInt("Extra Rows", category, 12, 0, 20, "How many extra rows are displayed in the inventory screen");
-		ModSettings.MORE_COLS = config.getInt("Extra Columns", category, 16, 0, 20, "How many extra columns are displayed in the inventory screen");
+		ModSettings.MORE_ROWS = config.getInt("extra_rows", category, 12, 0, 20, "How many extra rows are displayed in the inventory screen");
+		ModSettings.MORE_COLS = config.getInt("extra_columns", category, 16, 0, 20, "How many extra columns are displayed in the inventory screen");
 		
 		
 		ModSettings.fullCols = 9 + ModSettings.MORE_COLS;
@@ -58,10 +58,11 @@ public class ModMutatedInventory
 		ModSettings.invoSize  = ModSettings.fullCols * ModSettings.fullRows;
 		
 		//(String name, String category, String defaultValue, String comment)
-		ModSettings.showText = config.getBoolean("Show Text",category,false,"Show or hide the 'Crafting' text in the inventory");
-		ModSettings.showCharacter = config.getBoolean("Show Character",category,true,"Show or hide the animated character text in the inventory");
-		ModSettings.showEnderButton = config.getBoolean("Show Ender Chest Button",category,true,"Show or hide the ender chest button");
-		 
+		ModSettings.showText = config.getBoolean("show_text",category,false,"Show or hide the 'Crafting' text in the inventory");
+		ModSettings.showCharacter = config.getBoolean("show_character",category,true,"Show or hide the animated character text in the inventory");
+		ModSettings.showEnderButton = config.getBoolean("button_ender_chest",category,true,"Show or hide the ender chest button");
+		ModSettings.showSortButton = config.getBoolean("button_sort",category,true,"Show or hide the ender chest button");
+		
 		config.save();
 		
 		ModSettings.SaveToCache();

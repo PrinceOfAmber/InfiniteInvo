@@ -3,6 +3,7 @@ package infiniteinvo.core.proxies;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -42,12 +43,15 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		InventoryPlayer invo = p.inventory;
 		
 		int iEmpty = -1;
-		for(int i = 0; i < invo.getSizeInventory();i++)
+		ItemStack item = null;
+		//0 to 8 is crafting
+		//armor is 384-387
+		for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
 		{
 			System.out.println(i+"");
 			
-			
-			if(invo.getStackInSlot(i) == null)
+			item = invo.getStackInSlot(i);
+			if(item == null)
 			{
 				System.out.println(i+" is empty");
 				iEmpty = i;
@@ -59,7 +63,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 				if(iEmpty > 0)
 				{
 					//move i into iEmpty
-					System.out.println(i+" swap to "+iEmpty);
+					System.out.println(i+" swap to "+iEmpty +"__" +item.getDisplayName());
 					
 					invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
 
