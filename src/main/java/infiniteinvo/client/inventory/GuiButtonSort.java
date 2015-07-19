@@ -1,7 +1,8 @@
 package infiniteinvo.client.inventory;
 
 import infiniteinvo.core.ModMutatedInventory;
-import infiniteinvo.core.proxies.ButtonPacket;
+import infiniteinvo.core.proxies.EnderButtonPacket;
+import infiniteinvo.core.proxies.SortButtonPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,11 +10,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class GuiButtonSam extends GuiButton 
+public class GuiButtonSort extends GuiButton 
 {
 	//imported from https://github.com/PrinceOfAmber/SamsPowerups , author Lothrazar aka Sam Bassett
 	private EntityPlayer player;
-    public GuiButtonSam(int buttonId, int x, int y, int w,int h,String buttonText, EntityPlayer player)
+    public GuiButtonSort(int buttonId, int x, int y, int w,int h,String buttonText, EntityPlayer player)
     {
     	super(buttonId, x, y, w,h, buttonText);
     	this.player = player;
@@ -46,7 +47,7 @@ public class GuiButtonSam extends GuiButton
     		NBTTagCompound tags = new NBTTagCompound();
     		tags.setInteger("world", this.player.worldObj.provider.getDimensionId());
     		tags.setString("player", this.player.getName());
-    		ModMutatedInventory.instance.network.sendToServer(new ButtonPacket(tags));
+    		ModMutatedInventory.instance.network.sendToServer(new SortButtonPacket(tags));
     	}
     	
     	return pressed;

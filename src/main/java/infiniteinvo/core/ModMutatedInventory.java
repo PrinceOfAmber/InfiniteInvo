@@ -1,7 +1,8 @@
 package infiniteinvo.core;
 
-import infiniteinvo.core.proxies.ButtonPacket;
+import infiniteinvo.core.proxies.EnderButtonPacket;
 import infiniteinvo.core.proxies.CommonProxy; 
+import infiniteinvo.core.proxies.SortButtonPacket;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Logger;
@@ -41,7 +42,8 @@ public class ModMutatedInventory
     {
     	logger = event.getModLog();
     	network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-    	network.registerMessage(ButtonPacket.class, ButtonPacket.class, ButtonPacket.ID, Side.SERVER);
+    	network.registerMessage(EnderButtonPacket.class, EnderButtonPacket.class, EnderButtonPacket.ID, Side.SERVER);
+    	network.registerMessage(SortButtonPacket.class, SortButtonPacket.class, SortButtonPacket.ID, Side.SERVER);
     	
     	config = new Configuration(event.getSuggestedConfigurationFile(), true);
     	config.load();

@@ -45,17 +45,17 @@ public class GuiBigInventory extends GuiInventory
 			
 			if(ModSettings.showEnderButton)
 			{
-				GuiButtonSam ender_chest = new GuiButtonSam(100, x, y ,90,20, StatCollector.translateToLocal("tile.enderChest.name"),this.mc.thePlayer);
+				GuiButtonEnderChest ender_chest = new GuiButtonEnderChest(100, x, y ,90,20, StatCollector.translateToLocal("tile.enderChest.name"),this.mc.thePlayer);
 
 				
 				this.buttonList.add(ender_chest);
 			}
 			
 		
-		//	x += 90;
-			//GuiButtonSam b = new GuiButtonSam(101, x, y ,90,20, StatCollector.translateToLocal(ModMutatedInventory.MODID+".sort"),this.mc.thePlayer);
+			y += 40;
+			GuiButtonEnderChest b = new GuiButtonEnderChest(101, x, y ,90,20, StatCollector.translateToLocal(ModMutatedInventory.MODID+".sort"),this.mc.thePlayer);
 			
-			//this.buttonList.add(b);
+			this.buttonList.add(b);
 			
 		}
     }
