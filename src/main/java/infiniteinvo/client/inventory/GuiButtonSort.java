@@ -15,24 +15,13 @@ public class GuiButtonSort extends GuiButton
 {
 	//imported from https://github.com/PrinceOfAmber/SamsPowerups , author Lothrazar aka Sam Bassett
 	private EntityPlayer player;
-    public GuiButtonSort(int buttonId, int x, int y, int w,int h, EntityPlayer player)
+	private int sortType;
+    public GuiButtonSort(int buttonId, int x, int y, int w,int h, EntityPlayer player, int sort, String text)
     {
-    	super(buttonId, x, y, w,h, StatCollector.translateToLocal(ModMutatedInventory.MODID+".sort"));
+    	super(buttonId, x, y, w,h, text );//StatCollector.translateToLocal(ModMutatedInventory.MODID+".sort")
     	this.player = player;
+    	sortType = sort;
     }
-    /*
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void drawButton(Minecraft mc, int mouseX, int mouseY)
-    {
-    	//we could add stuff to the button here dyanmically if we want
-    	// this.displayString += "button text";
-    	 
-    	 //
-    	 
-    	 super.drawButton(mc, mouseX, mouseY);
-    }
-    */
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -48,6 +37,7 @@ public class GuiButtonSort extends GuiButton
     		NBTTagCompound tags = new NBTTagCompound();
     		tags.setInteger("world", this.player.worldObj.provider.getDimensionId());
     		tags.setString("player", this.player.getName());
+    		tags.setInteger("sort", sortType);
     		ModMutatedInventory.instance.network.sendToServer(new SortButtonPacket(tags));
     	}
     	

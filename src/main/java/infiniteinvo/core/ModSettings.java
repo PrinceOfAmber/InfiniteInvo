@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class ModSettings
 {
 	public static NBTTagCompound cachedSettings = new NBTTagCompound();
-	
+
 	public static int invoSize;
 	public static int MORE_ROWS;
 	public static int MORE_COLS;

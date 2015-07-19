@@ -56,7 +56,13 @@ public class GuiBigInventory extends GuiInventory
 			if(ModSettings.showSortButton)
 			{
 				y += 40;
-				sortButton = new GuiButtonSort(101, x, y ,90,20, this.mc.thePlayer);
+				sortButton = new GuiButtonSort(101, x, y ,90,20, this.mc.thePlayer,ModMutatedInventory.SORT_LEFT,"<");
+				
+				this.buttonList.add(sortButton);
+				
+
+				y += 40;
+				sortButton = new GuiButtonSort(102, x, y ,90,20, this.mc.thePlayer,ModMutatedInventory.SORT_RIGHT,">");
 				
 				this.buttonList.add(sortButton);
 			}

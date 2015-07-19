@@ -25,7 +25,9 @@ public class ModMutatedInventory
 	public static final String NBT_ID = "ID";
 	public static final String NBT_Settings = "Settings";
 	public static final String NBT_Unlocked = "Unlocked";
-	
+
+	public final static int SORT_LEFT = 1;
+	public final static int SORT_RIGHT = 2;
     //My fork of this mod was created on July 17, 2015 at https://github.com/PrinceOfAmber/InfiniteInvo
     //original mod source was https://github.com/Funwayguy/InfiniteInvo
 	

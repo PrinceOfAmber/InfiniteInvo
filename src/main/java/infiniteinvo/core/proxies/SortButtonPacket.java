@@ -1,5 +1,7 @@
 package infiniteinvo.core.proxies;
 
+import infiniteinvo.core.ModMutatedInventory;
+import infiniteinvo.core.ModSettings;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -44,35 +46,59 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		
 		int iEmpty = -1;
 		ItemStack item = null;
-		//0 to 8 is crafting
-		//armor is 384-387
-		for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
+		
+		if(message.tags.getInteger("sort") == ModMutatedInventory.SORT_LEFT)
 		{
-			System.out.println(i+"");
-			
-			item = invo.getStackInSlot(i);
-			if(item == null)
+			//0 to 8 is crafting
+			//armor is 384-387
+			for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
 			{
-				System.out.println(i+" is empty");
-				iEmpty = i;
-			}
-			else
-			{
-				//i is not empty
+				System.out.println(i+"");
 				
-				if(iEmpty > 0)
+				item = invo.getStackInSlot(i);
+				if(item == null)
 				{
-					//move i into iEmpty
-					System.out.println(i+" swap to "+iEmpty +"__" +item.getDisplayName());
+					System.out.println(i+" is empty");
+					iEmpty = i;
+				}
+				else
+				{
+					//i is not empty
 					
-					invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
+					if(iEmpty > 0)
+					{
+						//move i into iEmpty
+						System.out.println(i+" swap to "+iEmpty +"__" +item.getDisplayName());
+						
+						invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
 
-					invo.setInventorySlotContents(i, null);
-					
-					iEmpty = i;					
+						invo.setInventorySlotContents(i, null);
+						
+						iEmpty = i;					
+					}
 				}
 			}
 		}
+		else if(message.tags.getInteger("sort") == ModMutatedInventory.SORT_RIGHT)
+		{
+			System.out.println("# columns = "+ModSettings.fullCols);
+			
+			for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
+			{
+				if(i % ModSettings.fullCols == 0)
+				{
+
+					System.out.println("this is end slate = "+i);
+					item = invo.getStackInSlot(i);
+					if(item != null)
+					{
+						System.out.println("__" +item.getDisplayName());
+						
+					}
+				}
+			}
+		}
+		
 		
 		return null;
 	
