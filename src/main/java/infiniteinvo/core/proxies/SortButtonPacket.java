@@ -1,5 +1,9 @@
 package infiniteinvo.core.proxies;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import infiniteinvo.core.ModMutatedInventory;
 import infiniteinvo.core.ModSettings;
 import io.netty.buffer.ByteBuf;
@@ -55,6 +59,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 			shiftRightOne(invo);
 			break;
 		case ModMutatedInventory.SORT_LEFTALL:
+			shiftLeftAll(invo);
 			break;
 		case ModMutatedInventory.SORT_RIGHTALL:
 			break;
@@ -84,8 +89,50 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		return null;
 	
 	}
+	private void shiftLeftAll(InventoryPlayer invo)
+	{
+		//ArrayList<Integer> empty = new ArrayList<Integer>();
+		Queue<Integer> empty = new LinkedList<Integer>();
+		//ArrayList<Integer> nonempty = new ArrayList<Integer>();
+		ItemStack item;
+		
+		//int firstEmpty = -1;
+		for(int i = hotbarSize; i < invo.getSizeInventory() - armorSize;i++)
+		{
+			item = invo.getStackInSlot(i);
+			
+			if(item == null)
+			{
+				empty.add(i);
+			}
+			else
+			{
+				//find an empty spot for it
+				if(empty.size() > 0 && empty.peek() < i)
+				{
+					//System.out.println("nonempty i "+i +" and empty "+empty.peek());
+					
+					//poll remove it since its not empty anymore
+					moveFromTo(invo,i,empty.poll());
+					empty.add(i);
+					
+				}
+			}
+		}
+	}
 	int hotbarSize = 9;
 	int armorSize = 4;
+	/**
+	 * WARNING: it assumes that 'to' is already empty, and overwrites it.  sets 'from' to empty for you
+	 * @param invo
+	 * @param from
+	 * @param to
+	 */
+	private static void moveFromTo(InventoryPlayer invo,int from, int to)
+	{
+		invo.setInventorySlotContents(to, invo.getStackInSlot(from));
+		invo.setInventorySlotContents(from, null);
+	}
 	private void shiftRightOne(InventoryPlayer invo) 
 	{
 		int iEmpty = -1;
@@ -104,9 +151,10 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 				if(iEmpty > 0)
 				{
 					//move i into iEmpty
-					invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
-
-					invo.setInventorySlotContents(i, null);
+					//invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
+					//invo.setInventorySlotContents(i, null);
+					
+					moveFromTo(invo,i,iEmpty);
 					
 					iEmpty = i;					
 				}
@@ -119,7 +167,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		ItemStack item = null;
 		//0 to 8 is crafting
 		//armor is 384-387
-		for(int i = hotbarSize; i < invo.getSizeInventory() - armorSize;i++)//388-4 384
+		for(int i = hotbarSize; i < invo.getSizeInventory() - armorSize;i++)
 		{
 		
 			item = invo.getStackInSlot(i);
@@ -134,9 +182,11 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 				if(iEmpty > 0)
 				{
 					//move i into iEmpty
-					invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
+					//invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
+					//invo.setInventorySlotContents(i, null);
 
-					invo.setInventorySlotContents(i, null);
+					moveFromTo(invo,i,iEmpty);
+					
 					
 					iEmpty = i;					
 				}
