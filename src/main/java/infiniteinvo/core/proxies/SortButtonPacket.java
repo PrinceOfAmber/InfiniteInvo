@@ -44,63 +44,93 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
  
 		InventoryPlayer invo = p.inventory;
 		
-		int iEmpty = -1;
-		ItemStack item = null;
-		
 		if(message.tags.getInteger("sort") == ModMutatedInventory.SORT_LEFT)
 		{
-			//0 to 8 is crafting
-			//armor is 384-387
-			for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
-			{
-				System.out.println(i+"");
-				
-				item = invo.getStackInSlot(i);
-				if(item == null)
-				{
-					System.out.println(i+" is empty");
-					iEmpty = i;
-				}
-				else
-				{
-					//i is not empty
-					
-					if(iEmpty > 0)
-					{
-						//move i into iEmpty
-						System.out.println(i+" swap to "+iEmpty +"__" +item.getDisplayName());
-						
-						invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
-
-						invo.setInventorySlotContents(i, null);
-						
-						iEmpty = i;					
-					}
-				}
-			}
+			shiftLeftOne(invo);
 		}
 		else if(message.tags.getInteger("sort") == ModMutatedInventory.SORT_RIGHT)
 		{
+			shiftRightOne(invo);
+			/*
+			int iEmpty = -1;
+			ItemStack item = null;
+			
 			System.out.println("# columns = "+ModSettings.fullCols);
 			
 			for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
 			{
-				if(i % ModSettings.fullCols == 0)
+				if((i-9) % ModSettings.fullCols == 0)
 				{
 
-					System.out.println("this is end slate = "+i);
 					item = invo.getStackInSlot(i);
 					if(item != null)
 					{
-						System.out.println("__" +item.getDisplayName());
+						System.out.println("this is end slate = "+i+"__" +item.getDisplayName());
 						
 					}
 				}
-			}
+			}*/
 		}
 		
 		
 		return null;
 	
+	}
+	private void shiftRightOne(InventoryPlayer invo) 
+	{
+		int iEmpty = -1;
+		ItemStack item = null;
+		//0 to 8 is crafting
+		//armor is 384-387
+		for(int i = invo.getSizeInventory()-5; i >= 9;i--)//388-4 384
+		{
+			item = invo.getStackInSlot(i);
+			if(item == null)
+			{
+				iEmpty = i;
+			}
+			else
+			{
+				if(iEmpty > 0)
+				{
+					//move i into iEmpty
+					invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
+
+					invo.setInventorySlotContents(i, null);
+					
+					iEmpty = i;					
+				}
+			}
+		}
+	}
+	private void shiftLeftOne(InventoryPlayer invo) 
+	{
+		int iEmpty = -1;
+		ItemStack item = null;
+		//0 to 8 is crafting
+		//armor is 384-387
+		for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
+		{
+		
+			item = invo.getStackInSlot(i);
+			if(item == null)
+			{
+				iEmpty = i;
+			}
+			else
+			{
+				//i is not empty
+				
+				if(iEmpty > 0)
+				{
+					//move i into iEmpty
+					invo.setInventorySlotContents(iEmpty, invo.getStackInSlot(i));
+
+					invo.setInventorySlotContents(i, null);
+					
+					iEmpty = i;					
+				}
+			}
+		}
 	}
 }

@@ -45,24 +45,27 @@ public class GuiBigInventory extends GuiInventory
 		{
 			int x = this.guiLeft + 280;
 			int y = this.guiTop + 10;
-			
+			int enderWidth = 90;
+			int height = 20;
 			if(ModSettings.showEnderButton)
 			{
-				enderButton = new GuiButtonEnderChest(100, x, y ,90,20,this.mc.thePlayer);
+				enderButton = new GuiButtonEnderChest(100, x, y ,90,height,this.mc.thePlayer);
 
 				
 				this.buttonList.add(enderButton);
 			}
 			if(ModSettings.showSortButton)
 			{
-				y += 40;
-				sortButton = new GuiButtonSort(101, x, y ,90,20, this.mc.thePlayer,ModMutatedInventory.SORT_LEFT,"<");
+				y += 20;
+				
+				
+				sortButton = new GuiButtonSort(101, x, y ,enderWidth/2-5,height, this.mc.thePlayer,ModMutatedInventory.SORT_LEFT,"<");
 				
 				this.buttonList.add(sortButton);
 				
 
-				y += 40;
-				sortButton = new GuiButtonSort(102, x, y ,90,20, this.mc.thePlayer,ModMutatedInventory.SORT_RIGHT,">");
+				x += enderWidth/2+5;
+				sortButton = new GuiButtonSort(102, x, y ,enderWidth/2-5,height, this.mc.thePlayer,ModMutatedInventory.SORT_RIGHT,">");
 				
 				this.buttonList.add(sortButton);
 			}
