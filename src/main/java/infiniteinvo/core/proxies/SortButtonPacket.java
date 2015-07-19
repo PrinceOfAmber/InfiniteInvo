@@ -36,6 +36,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		ByteBufUtils.writeTag(buf, this.tags);
 	}
 
+	public static final String NBT_SORT = "sort";
 
 	@Override
 	public IMessage onMessage(SortButtonPacket message, MessageContext ctx)
@@ -43,46 +44,55 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		EntityPlayer p = ctx.getServerHandler().playerEntity;
  
 		InventoryPlayer invo = p.inventory;
+		int sortType = message.tags.getInteger(NBT_SORT);
 		
-		if(message.tags.getInteger("sort") == ModMutatedInventory.SORT_LEFT)
+		switch(sortType)
 		{
+		case ModMutatedInventory.SORT_LEFT:
 			shiftLeftOne(invo);
-		}
-		else if(message.tags.getInteger("sort") == ModMutatedInventory.SORT_RIGHT)
-		{
+			break;
+		case ModMutatedInventory.SORT_RIGHT:
 			shiftRightOne(invo);
-			/*
-			int iEmpty = -1;
-			ItemStack item = null;
-			
-			System.out.println("# columns = "+ModSettings.fullCols);
-			
-			for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
-			{
-				if((i-9) % ModSettings.fullCols == 0)
-				{
-
-					item = invo.getStackInSlot(i);
-					if(item != null)
-					{
-						System.out.println("this is end slate = "+i+"__" +item.getDisplayName());
-						
-					}
-				}
-			}*/
+			break;
+		case ModMutatedInventory.SORT_LEFTALL:
+			break;
+		case ModMutatedInventory.SORT_RIGHTALL:
+			break;
 		}
+	 
+
+		/*
+		int iEmpty = -1;
+		ItemStack item = null;
 		
+		System.out.println("# columns = "+ModSettings.fullCols);
+		
+		for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
+		{
+			if((i-9) % ModSettings.fullCols == 0)
+			{
+
+				item = invo.getStackInSlot(i);
+				if(item != null)
+				{
+					System.out.println("this is end slate = "+i+"__" +item.getDisplayName());
+					
+				}
+			}
+		}*/
 		
 		return null;
 	
 	}
+	int hotbarSize = 9;
+	int armorSize = 4;
 	private void shiftRightOne(InventoryPlayer invo) 
 	{
 		int iEmpty = -1;
 		ItemStack item = null;
 		//0 to 8 is crafting
 		//armor is 384-387
-		for(int i = invo.getSizeInventory()-5; i >= 9;i--)//388-4 384
+		for(int i = invo.getSizeInventory() - (armorSize + 1); i >= hotbarSize;i--)//388-4 384
 		{
 			item = invo.getStackInSlot(i);
 			if(item == null)
@@ -109,7 +119,7 @@ public class SortButtonPacket implements IMessage , IMessageHandler<SortButtonPa
 		ItemStack item = null;
 		//0 to 8 is crafting
 		//armor is 384-387
-		for(int i = 9; i < invo.getSizeInventory()-4;i++)//388-4 384
+		for(int i = hotbarSize; i < invo.getSizeInventory() - armorSize;i++)//388-4 384
 		{
 		
 			item = invo.getStackInSlot(i);

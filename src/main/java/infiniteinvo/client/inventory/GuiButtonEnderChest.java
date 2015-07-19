@@ -32,8 +32,7 @@ public class GuiButtonEnderChest extends GuiButton
     	
     		//send packet to server from client (this) makes sense
     		NBTTagCompound tags = new NBTTagCompound();
-    		//tags.setInteger("world", this.player.worldObj.provider.getDimensionId());
-    		//tags.setString("player", this.player.getName());
+
     		ModMutatedInventory.instance.network.sendToServer(new EnderButtonPacket(tags));
     	}
     	

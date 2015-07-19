@@ -35,9 +35,8 @@ public class GuiButtonSort extends GuiButton
     	
     		//send packet to server from client (this) makes sense
     		NBTTagCompound tags = new NBTTagCompound();
-    		tags.setInteger("world", this.player.worldObj.provider.getDimensionId());
-    		tags.setString("player", this.player.getName());
-    		tags.setInteger("sort", sortType);
+  
+    		tags.setInteger(SortButtonPacket.NBT_SORT, sortType);
     		ModMutatedInventory.instance.network.sendToServer(new SortButtonPacket(tags));
     	}
     	

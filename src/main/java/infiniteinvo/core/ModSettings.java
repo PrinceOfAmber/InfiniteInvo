@@ -18,7 +18,7 @@ public class ModSettings
 	public static boolean showText;
 	public static boolean showCharacter;
 
-	public static boolean showSortButton;
+	public static boolean showSortButtons;
 	
 	public static void SaveToCache()
 	{

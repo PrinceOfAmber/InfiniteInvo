@@ -28,6 +28,8 @@ public class ModMutatedInventory
 
 	public final static int SORT_LEFT = 1;
 	public final static int SORT_RIGHT = 2;
+	public final static int SORT_LEFTALL = -1;
+	public final static int SORT_RIGHTALL = -2;
     //My fork of this mod was created on July 17, 2015 at https://github.com/PrinceOfAmber/InfiniteInvo
     //original mod source was https://github.com/Funwayguy/InfiniteInvo
 	
@@ -63,7 +65,7 @@ public class ModMutatedInventory
 		ModSettings.showText = config.getBoolean("show_text",category,false,"Show or hide the 'Crafting' text in the inventory");
 		ModSettings.showCharacter = config.getBoolean("show_character",category,true,"Show or hide the animated character text in the inventory");
 		ModSettings.showEnderButton = config.getBoolean("button_ender_chest",category,true,"Show or hide the ender chest button");
-		ModSettings.showSortButton = config.getBoolean("button_sort",category,true,"Show or hide the ender chest button");
+		ModSettings.showSortButtons = config.getBoolean("button_sort",category,true,"Show or hide the ender chest button");
 		
 		config.save();
 		
